@@ -1,12 +1,21 @@
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
+'use client';
+import CVForm, { FormValues } from '@/components/CVForm';
+import MyDocument from '@/components/CVTemp/MyDocument';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [cvData, setCvData] = useState<FormValues>({ name: '' , job: '' });
+  const handleGeneratePdf = (params: FormValues) => {
+    setCvData(params);
+  };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button>Test</Button>
-      <span className=' '>1</span>
+    <main className='flex container gap-x-4'>
+      <div className='flex-1'>
+        <CVForm onGeneratePdf={handleGeneratePdf} />
+      </div>
+      <div className='flex-1'>
+        <MyDocument cvData={cvData} />
+      </div>
     </main>
-  )
+  );
 }
-  
