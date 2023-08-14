@@ -6,6 +6,7 @@ import { Form } from '@/components/ui/form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import BaseInfoForm from './BaseInfoForm';
+import { defaultValues } from '@/App';
 
 const formSchema = z.object({
   name: z.string().optional(),
@@ -13,7 +14,7 @@ const formSchema = z.object({
   jobAddress: z.string().default('').optional(),
   phone: z
     .string()
-    .regex(/^1[3456789]\\d{9}$/, { message: '手机号格式不正确' })
+    .regex(/^1[3456789]\d{9}$/, { message: '手机号格式不正确' })
     .optional(),
   email: z.string().email({ message: '邮箱格式不正确' }).optional(),
   birthday: z.date().optional().default(new Date()),
@@ -25,10 +26,7 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
   const { onGeneratePdf } = props;
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      job: '',
-    },
+    defaultValues,
   });
 
   // 2. Define a submit handler.
@@ -40,9 +38,11 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
         <Tabs defaultValue='baseInfo' className=''>
-          <TabsList className='grid w-full grid-cols-2'>
+          <TabsList className=''>
             <TabsTrigger value='baseInfo'>基本信息</TabsTrigger>
-            <TabsTrigger value='test'>Password</TabsTrigger>
+            <TabsTrigger value='test'>工作经历</TabsTrigger>
+            <TabsTrigger value='test1'>专业技能</TabsTrigger>
+            <TabsTrigger value='test2'>教育经历</TabsTrigger>
           </TabsList>
           <TabsContent value='baseInfo'>
             <BaseInfoForm form={form} />
