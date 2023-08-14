@@ -9,7 +9,7 @@ export default function Home() {
   };
   return (
     <main className='flex container gap-x-4'>
-      <div className='flex-1'>
+      <div className='flex-1 py-4'>
         <CVForm onGeneratePdf={handleGeneratePdf} />
       </div>
       <div className='flex-1'>
