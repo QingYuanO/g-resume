@@ -17,7 +17,6 @@ export type FieldOption = {
   type: 'input' | 'select' | 'date';
 };
 
-
 const BaseInfoFormItem = ({ form, name, label, type }: { form: UseFormReturn<FormValues> } & FieldOption) => {
   return (
     <FormField
@@ -36,14 +35,14 @@ const BaseInfoFormItem = ({ form, name, label, type }: { form: UseFormReturn<For
                       variant={'outline'}
                       className={cn('w-full pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                     >
-                      {field.value ? format(field.value as Date, 'yyyy-MM-dd') : <span>选择日期</span>}
+                      {field.value && field.value instanceof Date ? format(field.value, 'yyyy-MM-dd') : <span>选择日期</span>}
                       <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className='w-auto p-0' align='start'>
                     <Calendar
                       mode='single'
-                      selected={field.value}
+                      selected={field.value as Date}
                       onSelect={field.onChange}
                       locale={zhCN}
                       disabled={(date: Date) => date > new Date() || date < new Date('1900-01-01')}
@@ -62,4 +61,4 @@ const BaseInfoFormItem = ({ form, name, label, type }: { form: UseFormReturn<For
   );
 };
 
-export default BaseInfoFormItem
+export default BaseInfoFormItem;
