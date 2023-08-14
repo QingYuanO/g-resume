@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-=======
-'use client';
->>>>>>> 9ef9ff2076e8e7247624886c8d14e563a7a3318f
 import React, { PropsWithChildren } from 'react';
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer';
 import { FormValues } from '../CVForm';

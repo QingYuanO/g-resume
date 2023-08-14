@@ -13,7 +13,7 @@ export type FormValues = z.infer<typeof formSchema>;
 
 export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => void }) {
   const { onGeneratePdf } = props;
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -21,7 +21,7 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormValues) {
     console.log(values);
     onGeneratePdf?.(values);
   }
