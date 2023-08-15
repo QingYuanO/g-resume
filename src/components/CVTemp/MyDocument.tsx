@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
 const MyDocument = (props: PropsWithChildren<{ cvData: FormValues }>) => {
   const { cvData } = props;
-  const { name, job, jobAddress, phone, email, birthday, weChat } = cvData;
+  const { name, job, jobAddress, phone, email, birthday, weChat,introduce } = cvData;
   return (
     <PDFViewer className='w-full h-screen'>
       <Document title='前端工程师'>
@@ -41,7 +41,7 @@ const MyDocument = (props: PropsWithChildren<{ cvData: FormValues }>) => {
                 </View>
                 <BWText
                   style={{ fontSize: 16 }}
-                  text='五年前端开发经验，三年大厂任职经验，对React以及周边生态系统有比较深入的了解，拥有丰富的实战经验，对前端开发领域拥有极大的热情与兴趣。'
+                  text={introduce}
                 />
               </View>
               <View style={{ flex: 1, rowGap: 8 }}>

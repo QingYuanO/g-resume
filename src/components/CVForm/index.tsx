@@ -19,6 +19,15 @@ const formSchema = z.object({
   email: z.string().email({ message: '邮箱格式不正确' }).optional(),
   birthday: z.date().optional().default(new Date()),
   weChat: z.string().optional(),
+  introduce: z.string().optional(),
+  customUrls: z
+    .array(
+      z.object({
+        name: z.string(),
+        url: z.string(),
+      })
+    )
+    .optional(),
 });
 export type FormValues = z.infer<typeof formSchema>;
 
