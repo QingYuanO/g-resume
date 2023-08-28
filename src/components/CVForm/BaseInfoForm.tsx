@@ -1,10 +1,12 @@
-import { UseFormReturn } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { FormValues } from '.';
 import BaseInfoFormItem, { FieldOption } from './BasicFormItem';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '../ui/textarea';
-import { FormField } from '../ui/form';
-import { Button } from '../ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { FormField } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { MinusCircle } from 'lucide-react';
 
 const baseInfoFields: FieldOption[] = [
   {
@@ -44,7 +46,11 @@ const baseInfoFields: FieldOption[] = [
   },
 ];
 
-export default function BaseInfoForm({ form }: { form: UseFormReturn<FormValues> }) {
+export default function BaseInfoForm() {
+  const form = useFormContext<FormValues>();
+  const onAddCustomUrls = () => {
+    form.setValue('customUrls', [...(form.getValues('customUrls') ?? []), { name: '', url: '' }]);
+  };
   return (
     <div className='flex flex-col gap-y-3'>
       <Card className=''>
@@ -52,9 +58,9 @@ export default function BaseInfoForm({ form }: { form: UseFormReturn<FormValues>
           <CardTitle className='text-lg'>个人信息</CardTitle>
           <CardDescription>包含你的个人信息以及联系方式</CardDescription>
         </CardHeader>
-        <CardContent className='gap-x-8 gap-y-2 flex flex-wrap px-4'>
+        <CardContent className='gap-x-8 gap-y-2 grid grid-cols-3 md:grid-cols-6 px-4'>
           {baseInfoFields.map((field) => (
-            <BaseInfoFormItem key={field.name} {...field} form={form} />
+            <BaseInfoFormItem key={field.name} {...field} className=' col-span-3' />
           ))}
         </CardContent>
       </Card>
@@ -63,17 +69,27 @@ export default function BaseInfoForm({ form }: { form: UseFormReturn<FormValues>
           <CardTitle className='text-lg'>自定义内容</CardTitle>
           <CardDescription>你可以在下方区域添加任何链接或者文本</CardDescription>
         </CardHeader>
-        <CardContent className=''>
+        <CardContent className=' px-4'>
           <FormField
             control={form.control}
             name='customUrls'
             render={({ field }) => {
               // field.onChange()
+              const onCustomUrlsChange = (value: string, index: number, key: 'name' | 'url') => {
+                (field.value ?? [])[index][key] = value;
+                field.onChange([...(field.value ?? [])]);
+              };
+              const onRemove = (index: number) => {
+                field.onChange(field.value?.filter((_, i) => i !== index));
+              };
               return (
-                <div>
+                <div className='flex flex-col gap-y-2'>
                   {field.value?.map((item, index) => (
-                    <div key={index}>
-                      {item.name}-{item.url}
+                    <div key={index} className='flex gap-x-2 items-center'>
+                      {/* {item.name}-{item.url} */}
+                      <Input className='w-1/3' value={item.name} onChange={(e) => onCustomUrlsChange(e.target.value, index, 'name')} />
+                      <Input value={item.url} onChange={(e) => onCustomUrlsChange(e.target.value, index, 'url')} type='url' />
+                      <MinusCircle className=' cursor-pointer text-red-500' onClick={() => onRemove(index)} />
                     </div>
                   ))}
                 </div>
@@ -82,7 +98,7 @@ export default function BaseInfoForm({ form }: { form: UseFormReturn<FormValues>
           />
         </CardContent>
         <CardFooter className='p-4'>
-          <Button variant='link' className='p-0'>
+          <Button variant='link' className='p-0' onClick={onAddCustomUrls} type='button'>
             添加
           </Button>
         </CardFooter>

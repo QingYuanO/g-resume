@@ -7,6 +7,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import BaseInfoForm from './BaseInfoForm';
 import { defaultValues } from '@/App';
+import { ScrollArea } from '../ui/scroll-area';
+import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   name: z.string().optional(),
@@ -37,7 +40,26 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
     resolver: zodResolver(formSchema),
     defaultValues,
   });
+  const [isFixedTab, setIsFixedTab] = useState(false);
+  useEffect(() => {
+    function handleScroll() {
+      // 获取滚动的垂直位置
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > 16) {
+        setIsFixedTab(true);
+      } else {
+        setIsFixedTab(false);
+      }
+    }
 
+    // 添加滚动事件监听
+    window.addEventListener('scroll', handleScroll);
+
+    // 在组件卸载时移除事件监听
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   // 2. Define a submit handler.
   function onSubmit(values: FormValues) {
     console.log(values);
@@ -45,20 +67,22 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2 py-4 h-full md:h-screen '>
         <Tabs defaultValue='baseInfo' className=''>
-          <TabsList className=''>
+          <TabsList className={cn('justify-center w-full md:w-fit md:relative duration-150', isFixedTab && 'fixed top-0 inset-x-0 z-50')}>
             <TabsTrigger value='baseInfo'>基本信息</TabsTrigger>
             <TabsTrigger value='test'>工作经历</TabsTrigger>
             <TabsTrigger value='test1'>专业技能</TabsTrigger>
             <TabsTrigger value='test2'>教育经历</TabsTrigger>
           </TabsList>
-          <TabsContent value='baseInfo'>
-            <BaseInfoForm form={form} />
-          </TabsContent>
-          <TabsContent value='test'>1</TabsContent>
+          {isFixedTab && <div className='h-10 md:hidden'></div>}
+          <ScrollArea className='md:h-[calc(100vh-8rem)]'>
+            <TabsContent value='baseInfo'>
+              <BaseInfoForm />
+            </TabsContent>
+            <TabsContent value='test'>1</TabsContent>
+          </ScrollArea>
         </Tabs>
-        <div className='basis-full'></div>
         <Button type='submit'>生成PDF</Button>
       </form>
     </Form>

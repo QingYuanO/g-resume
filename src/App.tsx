@@ -21,11 +21,11 @@ export default function Home() {
     setCvData(params);
   };
   return (
-    <main className='flex container gap-x-4'>
-      <div className='flex-1 basis-2/5 py-4'>
+    <main className='grid grid-cols-3 md:grid-cols-5 container gap-x-4 relative'>
+      <div className='col-span-3 md:col-span-3 relative'>
         <CVForm onGeneratePdf={handleGeneratePdf} />
       </div>
-      <div className='flex-1 basis-3/5'>
+      <div className='col-span-3 md:col-span-2'>
         <MyDocument cvData={cvData} />
       </div>
     </main>

@@ -1,7 +1,7 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 
 import { Input } from '@/components/ui/input';
-import { UseFormReturn } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { FormValues } from '.';
@@ -17,13 +17,14 @@ export type FieldOption = {
   type: 'input' | 'select' | 'date';
 };
 
-const BaseInfoFormItem = ({ form, name, label, type }: { form: UseFormReturn<FormValues> } & FieldOption) => {
+const BaseInfoFormItem = ({ name, label, type, className }: FieldOption & { className?: string }) => {
+  const form = useFormContext<FormValues>();
   return (
     <FormField
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className='basis-[calc(50%-4rem/2)]'>
+        <FormItem className={className}>
           <FormLabel>{label}</FormLabel>
           <FormControl>
             {{
