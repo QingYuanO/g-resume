@@ -1,7 +1,7 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 
 import { Input } from '@/components/ui/input';
-import { useFormContext } from 'react-hook-form';
+import { FieldPath, useFormContext } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { FormValues } from '.';
@@ -12,7 +12,7 @@ import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 
 export type FieldOption = {
-  name: keyof FormValues;
+  name: FieldPath<FormValues>;
   label: string;
   type: 'input' | 'select' | 'date';
 };

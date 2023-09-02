@@ -75,10 +75,10 @@ export default function BaseInfoForm() {
             name='customUrls'
             render={({ field }) => {
               // field.onChange()
-              const onCustomUrlsChange = (value: string, index: number, key: 'name' | 'url') => {
-                (field.value ?? [])[index][key] = value;
-                field.onChange([...(field.value ?? [])]);
-              };
+              // const onCustomUrlsChange = (value: string, index: number, key: 'name' | 'url') => {
+              //   (field.value ?? [])[index][key] = value;
+              //   field.onChange([...(field.value ?? [])]);
+              // };
               const onRemove = (index: number) => {
                 field.onChange(field.value?.filter((_, i) => i !== index));
               };
@@ -87,8 +87,8 @@ export default function BaseInfoForm() {
                   {field.value?.map((item, index) => (
                     <div key={index} className='flex gap-x-2 items-center'>
                       {/* {item.name}-{item.url} */}
-                      <Input className='w-1/3' value={item.name} onChange={(e) => onCustomUrlsChange(e.target.value, index, 'name')} />
-                      <Input value={item.url} onChange={(e) => onCustomUrlsChange(e.target.value, index, 'url')} type='url' />
+                      <Input className='w-1/3' {...form.register(`customUrls.${index}.name`)} />
+                      <Input value={item.url} {...form.register(`customUrls.${index}.url`)} type='url' />
                       <MinusCircle className=' cursor-pointer text-red-500' onClick={() => onRemove(index)} />
                     </div>
                   ))}

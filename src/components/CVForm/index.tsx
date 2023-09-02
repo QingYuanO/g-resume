@@ -10,6 +10,7 @@ import { defaultValues } from '@/App';
 import { ScrollArea } from '../ui/scroll-area';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import WorkExperienceForm from './WorkExperienceForm';
 
 const formSchema = z.object({
   name: z.string().optional(),
@@ -31,6 +32,23 @@ const formSchema = z.object({
       })
     )
     .optional(),
+  workExperience: z.array(
+    z.object({
+      company: z.string(),
+      position: z.string(),
+      jobName: z.string(),
+      startDate: z.date(),
+      endDate:z.date().optional(),
+      isNow: z.boolean(),
+      projects: z.array(
+        z.object({
+          name: z.string(),
+          description: z.string().optional(),
+          content: z.array(z.string()).optional(),
+        })
+      ),
+    })
+  ),
 });
 export type FormValues = z.infer<typeof formSchema>;
 
@@ -71,7 +89,7 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
         <Tabs defaultValue='baseInfo' className=''>
           <TabsList className={cn('justify-center w-full md:w-fit md:relative duration-150', isFixedTab && 'fixed top-0 inset-x-0 z-50')}>
             <TabsTrigger value='baseInfo'>基本信息</TabsTrigger>
-            <TabsTrigger value='test'>工作经历</TabsTrigger>
+            <TabsTrigger value='workExperience'>工作经历</TabsTrigger>
             <TabsTrigger value='test1'>专业技能</TabsTrigger>
             <TabsTrigger value='test2'>教育经历</TabsTrigger>
           </TabsList>
@@ -80,7 +98,11 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
             <TabsContent value='baseInfo'>
               <BaseInfoForm />
             </TabsContent>
-            <TabsContent value='test'>1</TabsContent>
+            <TabsContent value='workExperience'>
+              <WorkExperienceForm />
+            </TabsContent>
+            <TabsContent value='test1'>1</TabsContent>
+            <TabsContent value='test2'>1</TabsContent>
           </ScrollArea>
         </Tabs>
         <Button type='submit'>生成PDF</Button>
