@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@hookform/resolvers':
     specifier: ^3.2.0
@@ -23,6 +19,9 @@ dependencies:
   '@radix-ui/react-slot':
     specifier: ^1.0.2
     version: registry.npmmirror.com/@radix-ui/react-slot@1.0.2(@types/react@18.2.15)(react@18.2.0)
+  '@radix-ui/react-switch':
+    specifier: ^1.0.3
+    version: registry.npmmirror.com/@radix-ui/react-switch@1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
   '@radix-ui/react-tabs':
     specifier: ^1.0.4
     version: registry.npmmirror.com/@radix-ui/react-tabs@1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -44,6 +43,9 @@ dependencies:
   react:
     specifier: ^18.2.0
     version: registry.npmmirror.com/react@18.2.0
+  react-datepicker:
+    specifier: ^4.16.0
+    version: registry.npmmirror.com/react-datepicker@4.16.0(react-dom@18.2.0)(react@18.2.0)
   react-day-picker:
     specifier: ^8.8.0
     version: registry.npmmirror.com/react-day-picker@8.8.0(date-fns@2.30.0)(react@18.2.0)
@@ -832,6 +834,12 @@ packages:
       '@nodelib/fs.scandir': registry.npmmirror.com/@nodelib/fs.scandir@2.1.5
       fastq: registry.npmmirror.com/fastq@1.15.0
 
+  registry.npmmirror.com/@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@popperjs/core/-/core-2.11.8.tgz}
+    name: '@popperjs/core'
+    version: 2.11.8
+    dev: false
+
   registry.npmmirror.com/@radix-ui/number@1.0.1:
     resolution: {integrity: sha512-T5gIdVO2mmPW3NNhjNgEP3cqMXjXL9UbO0BzWcXfvdBs+BohbQxvd/K5hSVKmn9/lbTdsQVKbUcP5WLCwvUbBg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@radix-ui/number/-/number-1.0.1.tgz}
     name: '@radix-ui/number'
@@ -1352,6 +1360,36 @@ packages:
       react: registry.npmmirror.com/react@18.2.0
     dev: false
 
+  registry.npmmirror.com/@radix-ui/react-switch@1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mxm87F88HyHztsI7N+ZUmEoARGkC22YVW5CaC+Byc+HRpuvCrOBPTAnXgf+tZ/7i0Sg/eOePGdMhUKhPaQEqow==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@radix-ui/react-switch/-/react-switch-1.0.3.tgz}
+    id: registry.npmmirror.com/@radix-ui/react-switch/1.0.3
+    name: '@radix-ui/react-switch'
+    version: 1.0.3
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmmirror.com/@babel/runtime@7.22.10
+      '@radix-ui/primitive': registry.npmmirror.com/@radix-ui/primitive@1.0.1
+      '@radix-ui/react-compose-refs': registry.npmmirror.com/@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-context': registry.npmmirror.com/@radix-ui/react-context@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-primitive': registry.npmmirror.com/@radix-ui/react-primitive@1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-use-controllable-state': registry.npmmirror.com/@radix-ui/react-use-controllable-state@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-use-previous': registry.npmmirror.com/@radix-ui/react-use-previous@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-use-size': registry.npmmirror.com/@radix-ui/react-use-size@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@types/react': registry.npmmirror.com/@types/react@18.2.15
+      '@types/react-dom': registry.npmmirror.com/@types/react-dom@18.2.7
+      react: registry.npmmirror.com/react@18.2.0
+      react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
+    dev: false
+
   registry.npmmirror.com/@radix-ui/react-tabs@1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-egZfYY/+wRNCflXNHx+dePvnz9FbmssDTJBtgRfDY7e8SE5oIo3Py2eCB1ckAbh1Q7cQ/6yJZThJ++sgbxibog==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@radix-ui/react-tabs/-/react-tabs-1.0.4.tgz}
     id: registry.npmmirror.com/@radix-ui/react-tabs/1.0.4
@@ -1440,6 +1478,23 @@ packages:
     resolution: {integrity: sha512-v/5RegiJWYdoCvMnITBkNNx6bCj20fiaJnWtRkU18yITptraXjffz5Qbn05uOiQnOvi+dbkznkoaMltz1GnszQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.0.1.tgz}
     id: registry.npmmirror.com/@radix-ui/react-use-layout-effect/1.0.1
     name: '@radix-ui/react-use-layout-effect'
+    version: 1.0.1
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmmirror.com/@babel/runtime@7.22.10
+      '@types/react': registry.npmmirror.com/@types/react@18.2.15
+      react: registry.npmmirror.com/react@18.2.0
+    dev: false
+
+  registry.npmmirror.com/@radix-ui/react-use-previous@1.0.1(@types/react@18.2.15)(react@18.2.0):
+    resolution: {integrity: sha512-cV5La9DPwiQ7S0gf/0qiD6YgNqM5Fk97Kdrlc5yBcrF3jyEZQwm7vYFqMo4IfeHgJXsRaMvLABFtd0OVEmZhDw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@radix-ui/react-use-previous/-/react-use-previous-1.0.1.tgz}
+    id: registry.npmmirror.com/@radix-ui/react-use-previous/1.0.1
+    name: '@radix-ui/react-use-previous'
     version: 1.0.1
     peerDependencies:
       '@types/react': '*'
@@ -2130,6 +2185,12 @@ packages:
     version: 0.7.0
     dependencies:
       clsx: registry.npmmirror.com/clsx@2.0.0
+    dev: false
+
+  registry.npmmirror.com/classnames@2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/classnames/-/classnames-2.3.2.tgz}
+    name: classnames
+    version: 2.3.2
     dev: false
 
   registry.npmmirror.com/clone@2.1.2:
@@ -3389,6 +3450,25 @@ packages:
       inherits: registry.npmmirror.com/inherits@2.0.4
     dev: false
 
+  registry.npmmirror.com/react-datepicker@4.16.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-hNQ0PAg/LQoVbDUO/RWAdm/RYmPhN3cz7LuQ3hqbs24OSp69QCiKOJRrQ4jk1gv1jNR5oYu8SjjgfDh8q6Q1yw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-datepicker/-/react-datepicker-4.16.0.tgz}
+    id: registry.npmmirror.com/react-datepicker/4.16.0
+    name: react-datepicker
+    version: 4.16.0
+    peerDependencies:
+      react: ^16.9.0 || ^17 || ^18
+      react-dom: ^16.9.0 || ^17 || ^18
+    dependencies:
+      '@popperjs/core': registry.npmmirror.com/@popperjs/core@2.11.8
+      classnames: registry.npmmirror.com/classnames@2.3.2
+      date-fns: registry.npmmirror.com/date-fns@2.30.0
+      prop-types: registry.npmmirror.com/prop-types@15.8.1
+      react: registry.npmmirror.com/react@18.2.0
+      react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
+      react-onclickoutside: registry.npmmirror.com/react-onclickoutside@6.13.0(react-dom@18.2.0)(react@18.2.0)
+      react-popper: registry.npmmirror.com/react-popper@2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
   registry.npmmirror.com/react-day-picker@8.8.0(date-fns@2.30.0)(react@18.2.0):
     resolution: {integrity: sha512-QIC3uOuyGGbtypbd5QEggsCSqVaPNu8kzUWquZ7JjW9fuWB9yv7WyixKmnaFelTLXFdq7h7zU6n/aBleBqe/dA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-day-picker/-/react-day-picker-8.8.0.tgz}
     id: registry.npmmirror.com/react-day-picker/8.8.0
@@ -3415,6 +3495,12 @@ packages:
       scheduler: registry.npmmirror.com/scheduler@0.23.0
     dev: false
 
+  registry.npmmirror.com/react-fast-compare@3.2.2:
+    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-fast-compare/-/react-fast-compare-3.2.2.tgz}
+    name: react-fast-compare
+    version: 3.2.2
+    dev: false
+
   registry.npmmirror.com/react-hook-form@7.45.4(react@18.2.0):
     resolution: {integrity: sha512-HGDV1JOOBPZj10LB3+OZgfDBTn+IeEsNOKiq/cxbQAIbKaiJUe/KV8DBUzsx0Gx/7IG/orWqRRm736JwOfUSWQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-hook-form/-/react-hook-form-7.45.4.tgz}
     id: registry.npmmirror.com/react-hook-form/7.45.4
@@ -3431,6 +3517,36 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz}
     name: react-is
     version: 16.13.1
+    dev: false
+
+  registry.npmmirror.com/react-onclickoutside@6.13.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ty8So6tcUpIb+ZE+1HAhbLROvAIJYyJe/1vRrrcmW+jLsaM+/powDRqxzo6hSh9CuRZGSL1Q8mvcF5WRD93a0A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-onclickoutside/-/react-onclickoutside-6.13.0.tgz}
+    id: registry.npmmirror.com/react-onclickoutside/6.13.0
+    name: react-onclickoutside
+    version: 6.13.0
+    peerDependencies:
+      react: ^15.5.x || ^16.x || ^17.x || ^18.x
+      react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
+    dependencies:
+      react: registry.npmmirror.com/react@18.2.0
+      react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
+    dev: false
+
+  registry.npmmirror.com/react-popper@2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-popper/-/react-popper-2.3.0.tgz}
+    id: registry.npmmirror.com/react-popper/2.3.0
+    name: react-popper
+    version: 2.3.0
+    peerDependencies:
+      '@popperjs/core': ^2.0.0
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: ^16.8.0 || ^17 || ^18
+    dependencies:
+      '@popperjs/core': registry.npmmirror.com/@popperjs/core@2.11.8
+      react: registry.npmmirror.com/react@18.2.0
+      react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
+      react-fast-compare: registry.npmmirror.com/react-fast-compare@3.2.2
+      warning: registry.npmmirror.com/warning@4.0.3
     dev: false
 
   registry.npmmirror.com/react-refresh@0.14.0:
@@ -4016,6 +4132,14 @@ packages:
       fsevents: registry.npmmirror.com/fsevents@2.3.2
     dev: true
 
+  registry.npmmirror.com/warning@4.0.3:
+    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/warning/-/warning-4.0.3.tgz}
+    name: warning
+    version: 4.0.3
+    dependencies:
+      loose-envify: registry.npmmirror.com/loose-envify@1.4.0
+    dev: false
+
   registry.npmmirror.com/webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz}
     name: webidl-conversions
@@ -4076,3 +4200,7 @@ packages:
     name: zod
     version: 3.21.4
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

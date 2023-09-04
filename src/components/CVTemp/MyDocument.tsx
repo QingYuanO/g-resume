@@ -24,11 +24,13 @@ const styles = StyleSheet.create({
 
 const MyDocument = (props: PropsWithChildren<{ cvData: FormValues }>) => {
   const { cvData } = props;
-  const { name, job, jobAddress, phone, email, birthday, weChat, introduce, customUrls } = cvData;
+  const { name, job, jobAddress, phone, email, birthday, weChat, introduce, customUrls,workExperience } = cvData;
+  console.log(workExperience[0].projects[0]?.content?.split('\n'));
+  
   return (
     <PDFViewer className='w-full h-screen'>
       <Document title='前端工程师'>
-        <Page size='A4' style={[styles.page]}>
+        <Page size='A3' style={[styles.page]}>
           <View style={{ borderTop: '2px solid #ca3a08', color: '#1e293b', paddingHorizontal: 16, paddingVertical: 24 }}>
             <View style={{ flexDirection: 'row', columnGap: 20, marginBottom: 30 }}>
               <View style={{ flex: 2, rowGap: 8 }}>

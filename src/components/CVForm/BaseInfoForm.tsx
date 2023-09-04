@@ -37,7 +37,7 @@ const baseInfoFields: FieldOption[] = [
   {
     name: 'birthday',
     label: '出生日期',
-    type: 'date',
+    type: 'input',
   },
   {
     name: 'weChat',

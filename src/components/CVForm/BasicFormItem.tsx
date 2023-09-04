@@ -2,22 +2,25 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/comp
 
 import { Input } from '@/components/ui/input';
 import { FieldPath, useFormContext } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
 import { FormValues } from '.';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
-import { CalendarIcon } from 'lucide-react';
-import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
+import { ReactNode } from 'react';
+import { Textarea } from '../ui/textarea';
 
 export type FieldOption = {
   name: FieldPath<FormValues>;
   label: string;
-  type: 'input' | 'select' | 'date';
+  type: 'input' | 'select' | 'textarea';
+  rows?: number;
 };
 
-const BaseInfoFormItem = ({ name, label, type, className }: FieldOption & { className?: string }) => {
+const BaseInfoFormItem = ({
+  name,
+  label,
+  type,
+  className,
+  labelRight,
+  rows,
+}: FieldOption & { className?: string; labelRight?: ReactNode }) => {
   const form = useFormContext<FormValues>();
   return (
     <FormField
@@ -25,33 +28,15 @@ const BaseInfoFormItem = ({ name, label, type, className }: FieldOption & { clas
       name={name}
       render={({ field }) => (
         <FormItem className={className}>
-          <FormLabel>{label}</FormLabel>
+          <div className=' flex justify-between items-center'>
+            <FormLabel className='my-2'>{label}</FormLabel>
+            {labelRight}
+          </div>
+
           <FormControl>
             {{
               input: <Input placeholder={`请输入${label}`} {...field} value={field.value as string} />,
-              date: (
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant={'outline'}
-                      className={cn('w-full pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
-                    >
-                      {field.value && field.value instanceof Date ? format(field.value, 'yyyy-MM-dd') : <span>选择日期</span>}
-                      <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className='w-auto p-0' align='start'>
-                    <Calendar
-                      mode='single'
-                      selected={field.value as Date}
-                      onSelect={field.onChange}
-                      locale={zhCN}
-                      disabled={(date: Date) => date > new Date() || date < new Date('1900-01-01')}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-              ),
+              textarea: <Textarea placeholder={`请输入${label}`} {...field} value={field.value as string} rows={rows ?? 2} />,
               select: '',
             }[type] ?? ''}
           </FormControl>

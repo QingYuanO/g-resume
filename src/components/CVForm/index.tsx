@@ -21,7 +21,7 @@ const formSchema = z.object({
     .regex(/^1[3456789]\d{9}$/, { message: '手机号格式不正确' })
     .optional(),
   email: z.string().email({ message: '邮箱格式不正确' }).optional(),
-  birthday: z.date().optional().default(new Date()),
+  birthday: z.string().optional(),
   weChat: z.string().optional(),
   introduce: z.string().optional(),
   customUrls: z
@@ -34,17 +34,16 @@ const formSchema = z.object({
     .optional(),
   workExperience: z.array(
     z.object({
+      id: z.number(),
       company: z.string(),
       position: z.string(),
       jobName: z.string(),
-      startDate: z.date(),
-      endDate:z.date().optional(),
-      isNow: z.boolean(),
+      rangeDate: z.string(),
       projects: z.array(
         z.object({
           name: z.string(),
           description: z.string().optional(),
-          content: z.array(z.string()).optional(),
+          content: z.string().optional(),
         })
       ),
     })
@@ -86,7 +85,7 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2 py-4 h-full md:h-screen '>
-        <Tabs defaultValue='baseInfo' className=''>
+        <Tabs defaultValue='workExperience' className=''>
           <TabsList className={cn('justify-center w-full md:w-fit md:relative duration-150', isFixedTab && 'fixed top-0 inset-x-0 z-50')}>
             <TabsTrigger value='baseInfo'>基本信息</TabsTrigger>
             <TabsTrigger value='workExperience'>工作经历</TabsTrigger>
