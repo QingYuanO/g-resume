@@ -11,6 +11,7 @@ import { ScrollArea } from '../ui/scroll-area';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import WorkExperienceForm from './WorkExperienceForm';
+import SkillForm from './SkillForm';
 
 const formSchema = z.object({
   name: z.string().optional(),
@@ -46,6 +47,12 @@ const formSchema = z.object({
           content: z.string().optional(),
         })
       ),
+    })
+  ),
+  skills: z.array(
+    z.object({
+      description: z.string(),
+      content: z.string().optional(),
     })
   ),
 });
@@ -89,7 +96,7 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
           <TabsList className={cn('justify-center w-full md:w-fit md:relative duration-150', isFixedTab && 'fixed top-0 inset-x-0 z-50')}>
             <TabsTrigger value='baseInfo'>基本信息</TabsTrigger>
             <TabsTrigger value='workExperience'>工作经历</TabsTrigger>
-            <TabsTrigger value='test1'>专业技能</TabsTrigger>
+            <TabsTrigger value='skills'>专业技能</TabsTrigger>
             <TabsTrigger value='test2'>教育经历</TabsTrigger>
           </TabsList>
           {isFixedTab && <div className='h-10 md:hidden'></div>}
@@ -100,7 +107,9 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
             <TabsContent value='workExperience'>
               <WorkExperienceForm />
             </TabsContent>
-            <TabsContent value='test1'>1</TabsContent>
+            <TabsContent value='skills'>
+              <SkillForm />
+            </TabsContent>
             <TabsContent value='test2'>1</TabsContent>
           </ScrollArea>
         </Tabs>

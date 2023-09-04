@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
 
 const MyDocument = (props: PropsWithChildren<{ cvData: FormValues }>) => {
   const { cvData } = props;
-  const { name, job, jobAddress, phone, email, birthday, weChat, introduce, customUrls,workExperience } = cvData;
+  const { name, job, jobAddress, phone, email, birthday, weChat, introduce, customUrls,workExperience,skills } = cvData;
   console.log(workExperience[0].projects[0]?.content?.split('\n'));
+  console.log(skills[0]?.content?.split('\n'));
   
   return (
     <PDFViewer className='w-full h-screen'>

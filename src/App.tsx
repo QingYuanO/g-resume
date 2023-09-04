@@ -29,6 +29,27 @@ export const defaultValues: FormValues = {
       ],
     },
   ],
+  skills: [
+    {
+      description: '使用 Javascript（ES6）/ Typescript 进行前端开发，并且熟练掌握以下框架',
+      content:
+        'React 通用框架：Next / Taro / Umi / RN\nReact 状态管理：Zustand / Jotai / Redux Toolkit\nReact 组件库：Radix / Ant Design / shadcn/ui\nReact 常用库：React Query / React-hook-form\nRN常用库：React-native-navigation / React-native-reanimated / Tamagui',
+    },
+    {
+      description: '熟练使用 CSS3 以及周边工具 ',
+      content: '样式库：Tailwind / Panda Css\n解决方案：CSS Module\n预处理器：Less / PostCSS',
+    },
+    {
+      description: '掌握通用的前端工程化以及构建工具',
+      content: '使用 Webpack / Vite 完成Web 应用打包以及对应的前端性能优化的经验。\nPrettier / ESLint 管理编码风格标准。',
+    },
+    {
+      description: '熟练使用Taro / 微信小程序原生语法开发小程序',
+    },
+    {
+      description: '熟练使用Git进行版本控制和代码托管，熟悉Git flow',
+    },
+  ],
 };
 
 export default function Home() {

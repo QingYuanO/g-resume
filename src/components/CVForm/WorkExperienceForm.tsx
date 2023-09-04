@@ -1,12 +1,12 @@
 import { FieldPath, useFieldArray, useFormContext } from 'react-hook-form';
 import { FormValues } from '.';
-import { HelpCircle, PlusIcon, X } from 'lucide-react';
+import { PlusIcon } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import BaseInfoFormItem from './BasicFormItem';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { Button } from '../ui/button';
-import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { PropsWithChildren } from 'react';
+import PopoverConfirm from '../PopoverConfirm';
+import useOpenKeyStore from './store';
 
 export default function WorkExperienceForm() {
   const form = useFormContext<FormValues>();
@@ -14,7 +14,8 @@ export default function WorkExperienceForm() {
     control: form.control, // control props comes from useForm (optional: if you are using FormContext)
     name: 'workExperience', // unique name for your Field Array
   });
-
+  const workExperienceOpenKey = useOpenKeyStore((state) => state.workExperienceOpenKey);
+  const changeWorkExperienceOpenKey = useOpenKeyStore((state) => state.changeWorkExperienceOpenKey);
   const onAddWorkExperience = () => {
     append({
       id: new Date().getTime(),
@@ -27,23 +28,26 @@ export default function WorkExperienceForm() {
   };
 
   return (
-    <div className='flex flex-col gap-y-2'>
-      <Accordion type='single' collapsible className='flex flex-col gap-y-2'>
+    <div className='flex flex-col gap-y-4'>
+      <Accordion type='single' collapsible className='flex flex-col gap-y-4' value={workExperienceOpenKey}>
         {fields.map((item, index) => {
           const watchCompany = form.watch(`workExperience.${index}.company`);
           const watchRangeDate = form.watch(`workExperience.${index}.rangeDate`);
 
           const watchPosition = form.watch(`workExperience.${index}.position`);
-
+          const key = `workExperience.${index}`;
           return (
-            <AccordionItem key={item.id} value={`workExperience-${index}`} className='border-b-0'>
+            <AccordionItem key={item.id} value={key} className='border-b-0'>
               <Card className=''>
                 <CardHeader className='p-4'>
                   <CardTitle className='text-lg flex justify-between items-center'>
                     {watchCompany}
                     <div className='flex justify-between items-start'>
-                      <AccordionTrigger className='p-0 mr-2' />
-                      <PopoverConfirm onConfirm={() => remove(index)} />
+                      {workExperienceOpenKey !== key && <PopoverConfirm onConfirm={() => remove(index)} />}
+                      <AccordionTrigger
+                        className='p-0 ml-2'
+                        onClick={() => changeWorkExperienceOpenKey(workExperienceOpenKey === key ? '' : key)}
+                      />
                     </div>
                   </CardTitle>
                   <CardDescription>
@@ -120,12 +124,12 @@ const Projects = ({ index }: { index: number }) => {
       <div className='col-span-6 flex justify-between'>
         <span className='text-lg font-semibold'>项目</span> <PlusIcon className='cursor-pointer' size={20} onClick={onAddProject} />
       </div>
-      <Accordion type='single' defaultValue={`projects-${fields.length - 1}`} className='col-span-6 flex flex-col gap-y-3 '>
+      <Accordion type='single' collapsible className='col-span-6 flex flex-col gap-y-3 '>
         {fields.map((item, idx) => {
           const watchProjectName = form.watch(`workExperience.${index}.projects.${idx}.name`);
           return (
             <AccordionItem key={item.id} value={`projects-${idx}`} className='rounded-lg border bg-card text-card-foreground p-2'>
-              <div className='text-lg flex justify-between items-center'>
+              <div className='flex justify-between items-center font-semibold'>
                 {watchProjectName}
                 <div className='flex justify-between items-start'>
                   <AccordionTrigger className='p-0 mr-2' />
@@ -164,30 +168,5 @@ const Projects = ({ index }: { index: number }) => {
         })}
       </Accordion>
     </div>
-  );
-};
-
-const PopoverConfirm = ({ onConfirm }: PropsWithChildren<{ onConfirm?: () => void }>) => {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <X size={15} className='text-red-500 cursor-pointer' />
-      </PopoverTrigger>
-      <PopoverContent className='w-44'>
-        <p className='flex items-center gap-x-2'>
-          <HelpCircle size={15} className=' text-red-500' /> 确定要删除吗？
-        </p>
-        <div className='flex justify-end items-center gap-x-2 mt-4'>
-          <PopoverClose asChild>
-            <Button type='button' variant='ghost' size='sm' className='h-6'>
-              取消
-            </Button>
-          </PopoverClose>
-          <Button type='button' size='sm' className='h-6' onClick={onConfirm}>
-            确定
-          </Button>
-        </div>
-      </PopoverContent>
-    </Popover>
   );
 };
