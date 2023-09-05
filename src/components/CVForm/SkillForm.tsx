@@ -1,3 +1,4 @@
+'use client'
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { FormValues } from '.';
 import { PlusIcon } from 'lucide-react';

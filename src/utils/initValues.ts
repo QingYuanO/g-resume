@@ -1,8 +1,6 @@
-import CVForm, { FormValues } from '@/components/CVForm';
-import MyDocument from '@/components/CVTemp/MyDocument';
-import { useState } from 'react';
+import { FormValues } from "@/components/CVForm";
 
-export const defaultValues: FormValues = {
+const initValues: FormValues = {
   name: '陈守园',
   job: '前端开发工程师',
   jobAddress: '深圳',
@@ -51,20 +49,4 @@ export const defaultValues: FormValues = {
     },
   ],
 };
-
-export default function Home() {
-  const [cvData, setCvData] = useState<FormValues>(defaultValues);
-  const handleGeneratePdf = (params: FormValues) => {
-    setCvData(params);
-  };
-  return (
-    <main className='grid grid-cols-3 md:grid-cols-6 container gap-x-4 relative'>
-      <div className='col-span-3 md:col-span-3 relative'>
-        <CVForm onGeneratePdf={handleGeneratePdf} />
-      </div>
-      <div className='col-span-3 md:col-span-3'>
-        <MyDocument cvData={cvData} />
-      </div>
-    </main>
-  );
-}
+export default initValues

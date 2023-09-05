@@ -1,12 +1,12 @@
+'use client'
+/* eslint-disable jsx-a11y/alt-text */
 import { PropsWithChildren } from 'react';
 import { Page, Text, View, Document, StyleSheet, PDFViewer, Font, Image, Link } from '@react-pdf/renderer';
 import { FormValues } from '../CVForm';
-import LXGWFasmartGothic from '@/assets/font/LXGWFasmartGothic.ttf';
-import avatar from '@/assets/images/avatar.png';
 import BWText from './BWText';
 import { format } from 'date-fns';
 
-Font.register({ family: 'LXGWFasmartGothic', src: LXGWFasmartGothic });
+Font.register({ family: 'LXGWFasmartGothic', src: '/font/LXGWFasmartGothic.ttf' });
 
 // Create styles
 const styles = StyleSheet.create({
@@ -36,7 +36,7 @@ const MyDocument = (props: PropsWithChildren<{ cvData: FormValues }>) => {
             <View style={{ flexDirection: 'row', columnGap: 20, marginBottom: 30 }}>
               <View style={{ flex: 2, rowGap: 8 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 12 }}>
-                  <Image style={{ width: 50, height: 50, borderRadius: '50% ' }} src={avatar} />
+                  <Image style={{ width: 50, height: 50, borderRadius: '50% ' }} src={'/images/avatar.png'} />
                   <View style={{ rowGap: 8 }}>
                     <Text style={{ fontWeight: 600 }}>{name}</Text>
                     <Text style={{ color: '#ca3a08', fontSize: 12 }}>{job}</Text>

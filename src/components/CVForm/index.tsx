@@ -1,3 +1,4 @@
+'use client'
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
@@ -6,12 +7,12 @@ import { Form } from '@/components/ui/form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import BaseInfoForm from './BaseInfoForm';
-import { defaultValues } from '@/App';
 import { ScrollArea } from '../ui/scroll-area';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import WorkExperienceForm from './WorkExperienceForm';
 import SkillForm from './SkillForm';
+import initValues from '@/utils/initValues';
 
 const formSchema = z.object({
   name: z.string().optional(),
@@ -62,7 +63,7 @@ export default function CVForm(props: { onGeneratePdf?: (data: FormValues) => vo
   const { onGeneratePdf } = props;
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues,
+    defaultValues:initValues,
   });
   const [isFixedTab, setIsFixedTab] = useState(false);
   useEffect(() => {
