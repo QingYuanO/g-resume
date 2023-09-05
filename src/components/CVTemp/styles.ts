@@ -1,6 +1,14 @@
-import { StyleSheet } from '@react-pdf/renderer';
+import { StyleSheet } from "@react-pdf/renderer";
 
-const styles = StyleSheet.create({
+const globalStyles = StyleSheet.create({
+  page: {
+    fontFamily: "LXGWFasmartGothic",
+    flexDirection: "column",
+    backgroundColor: "#ffffff",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 14,
+  },
   itemP: {
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -11,6 +19,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export const border = '1px solid #ededed';
+export const border = "1px solid #ededed";
 
-export default styles;
+export default globalStyles;

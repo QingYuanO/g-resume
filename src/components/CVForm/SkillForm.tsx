@@ -7,7 +7,7 @@ import BaseInfoFormItem from './BasicFormItem';
 import { Button } from '../ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import PopoverConfirm from '../PopoverConfirm';
-import useOpenKeyStore from './store';
+import useOpenKeyStore from "@/store/openKey";
 
 export default function SkillForm() {
   const form = useFormContext<FormValues>();

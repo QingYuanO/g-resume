@@ -1,23 +1,14 @@
-'use client'
-import CVForm, { FormValues } from '@/components/CVForm';
-import MyDocument from '@/components/CVTemp/MyDocument';
-import initValues from '@/utils/initValues';
-import { useState } from 'react';
-
-
+import CVForm, { FormValues } from "@/components/CVForm";
+import PDFDocument from "@/components/CVTemp/PDFDocument";
 
 export default function Home() {
-  const [cvData, setCvData] = useState<FormValues>(initValues);
-  const handleGeneratePdf = (params: FormValues) => {
-    setCvData(params);
-  };
   return (
-    <main className='grid grid-cols-3 md:grid-cols-6 container gap-x-4 relative'>
-      <div className='col-span-3 md:col-span-3 relative'>
-        <CVForm onGeneratePdf={handleGeneratePdf} />
+    <main className="container relative grid grid-cols-3 gap-x-4 md:grid-cols-6">
+      <div className="relative col-span-3 md:col-span-3">
+        <CVForm />
       </div>
-      <div className='col-span-3 md:col-span-3'>
-        <MyDocument cvData={cvData} />
+      <div className="col-span-3 md:col-span-3">
+        <PDFDocument />
       </div>
     </main>
   );
