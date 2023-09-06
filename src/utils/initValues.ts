@@ -12,7 +12,7 @@ const initValues: FormValues = {
     "四年前端开发经验，对 React 以及周边⽣态系统有⽐较深⼊的了解，拥有丰富的实战经验，对前端开发领域拥有极⼤的热情与兴趣，喜欢探索未知。",
   customUrls: [
     { name: "Github", url: "https://github.com/chen-shouyuan" },
-    { name: "掘金", url: "https://juejin.cn/user/4212984289174823" },
+    { name: "掘金", url: "https://github.com/QingYuanO" },
   ],
   workExperience: [
     {
