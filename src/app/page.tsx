@@ -7,7 +7,7 @@ export default function Home() {
       <div className="relative col-span-3 md:col-span-3">
         <CVForm />
       </div>
-      <div className="col-span-3 md:col-span-3">
+      <div className="hidden md:block md:col-span-3">
         <PDFDocument />
       </div>
     </main>

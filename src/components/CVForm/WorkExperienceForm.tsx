@@ -34,7 +34,6 @@ export default function WorkExperienceForm() {
   );
   const onAddWorkExperience = () => {
     append({
-      id: new Date().getTime(),
       company: "-",
       position: "-",
       jobName: "",

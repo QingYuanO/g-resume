@@ -2,20 +2,32 @@ import { StyleSheet } from "@react-pdf/renderer";
 
 const globalStyles = StyleSheet.create({
   page: {
-    fontFamily: "LXGWFasmartGothic",
+    fontFamily: "NotoSansSC",
     flexDirection: "column",
     backgroundColor: "#ffffff",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 14,
+    fontSize: 12,
   },
   itemP: {
     paddingHorizontal: 12,
     paddingVertical: 6,
   },
-  text: {
-    letterSpacing: -1.5,
+});
+
+export const textStyles = StyleSheet.create({
+  xs: {
+    fontSize: 8,
+  },
+  sm: {
+    fontSize: 10,
+  },
+  base: {
     fontSize: 12,
+  },
+  lg: {
+    fontSize: 14,
+  },
+  xl: {
+    fontSize: 16,
   },
 });
 

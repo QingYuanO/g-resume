@@ -40,7 +40,6 @@ const formSchema = z.object({
     .optional(),
   workExperience: z.array(
     z.object({
-      id: z.number(),
       company: z.string(),
       position: z.string(),
       jobName: z.string(),

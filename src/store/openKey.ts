@@ -17,7 +17,7 @@ interface OpenKeyStore {
 const useOpenKeyStore = create<OpenKeyStore>()(
   persist(
     (set) => ({
-      tabOpenKey:'workExperience',
+      tabOpenKey:'baseInfo',
       skillsOpenKey: 'skills.0',
       workExperienceOpenKey: 'workExperience.0',
       educationOpenKey: 'education.0',
