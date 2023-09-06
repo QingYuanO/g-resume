@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@hookform/resolvers':
     specifier: ^3.2.0
@@ -7,6 +11,9 @@ dependencies:
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: registry.npmmirror.com/@radix-ui/react-accordion@1.1.2(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
+  '@radix-ui/react-dialog':
+    specifier: ^1.0.4
+    version: registry.npmmirror.com/@radix-ui/react-dialog@1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
   '@radix-ui/react-label':
     specifier: ^2.0.2
     version: registry.npmmirror.com/@radix-ui/react-label@2.0.2(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -602,6 +609,43 @@ packages:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime@7.22.15
       '@types/react': registry.npmmirror.com/@types/react@18.2.15
       react: registry.npmmirror.com/react@18.2.0
+    dev: false
+
+  registry.npmmirror.com/@radix-ui/react-dialog@1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-hJtRy/jPULGQZceSAP2Re6/4NpKo8im6V8P2hUqZsdFiSL8l35kYsw3qbRI6Ay5mQd2+wlLqje770eq+RJ3yZg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@radix-ui/react-dialog/-/react-dialog-1.0.4.tgz}
+    id: registry.npmmirror.com/@radix-ui/react-dialog/1.0.4
+    name: '@radix-ui/react-dialog'
+    version: 1.0.4
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': registry.npmmirror.com/@babel/runtime@7.22.15
+      '@radix-ui/primitive': registry.npmmirror.com/@radix-ui/primitive@1.0.1
+      '@radix-ui/react-compose-refs': registry.npmmirror.com/@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-context': registry.npmmirror.com/@radix-ui/react-context@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-dismissable-layer': registry.npmmirror.com/@radix-ui/react-dismissable-layer@1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-focus-guards': registry.npmmirror.com/@radix-ui/react-focus-guards@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-focus-scope': registry.npmmirror.com/@radix-ui/react-focus-scope@1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-id': registry.npmmirror.com/@radix-ui/react-id@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-portal': registry.npmmirror.com/@radix-ui/react-portal@1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-presence': registry.npmmirror.com/@radix-ui/react-presence@1.0.1(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-primitive': registry.npmmirror.com/@radix-ui/react-primitive@1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-slot': registry.npmmirror.com/@radix-ui/react-slot@1.0.2(@types/react@18.2.15)(react@18.2.0)
+      '@radix-ui/react-use-controllable-state': registry.npmmirror.com/@radix-ui/react-use-controllable-state@1.0.1(@types/react@18.2.15)(react@18.2.0)
+      '@types/react': registry.npmmirror.com/@types/react@18.2.15
+      '@types/react-dom': registry.npmmirror.com/@types/react-dom@18.2.7
+      aria-hidden: registry.npmmirror.com/aria-hidden@1.2.3
+      react: registry.npmmirror.com/react@18.2.0
+      react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
+      react-remove-scroll: registry.npmmirror.com/react-remove-scroll@2.5.5(@types/react@18.2.15)(react@18.2.0)
     dev: false
 
   registry.npmmirror.com/@radix-ui/react-direction@1.0.1(@types/react@18.2.15)(react@18.2.0):
