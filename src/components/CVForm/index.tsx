@@ -18,7 +18,7 @@ import useOpenKeyStore from "@/store/openKey";
 import useResumeStore from "@/store/resume";
 
 const formSchema = z.object({
-  avatar:z.string().optional(),
+  avatar: z.string().optional(),
   name: z.string().optional(),
   job: z.string().optional(),
   jobAddress: z.string().default("").optional(),
@@ -83,8 +83,12 @@ export default function CVForm() {
   });
   const [isFixedTab, setIsFixedTab] = useState(false);
   useEffect(() => {
-    const subscription = form.watch((value) => changeData(value as FormValues));
-    return () => subscription.unsubscribe();
+    if (process.env.NODE_ENV === "development") {
+      const subscription = form.watch((value) =>
+        changeData(value as FormValues),
+      );
+      return () => subscription.unsubscribe();
+    }
   }, [form, changeData]);
   useEffect(() => {
     function handleScroll() {
