@@ -50,7 +50,6 @@ const T1 = ({ resume }: { resume: FormValues }) => {
             color: primaryColor,
           },
         ]}
-        wrap
       >
         <View
           style={{
@@ -176,7 +175,7 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                       />
                       {companyNode}
                       {item.projects.map((project, idx) => {
-                        const content = project.content?.split("\n");
+                        const content = project.content?.split("\n").filter(Boolean);
                         return (
                           <View key={idx} style={{ rowGap: 2 }}>
                             <BWText
@@ -211,7 +210,7 @@ const T1 = ({ resume }: { resume: FormValues }) => {
             >
               <Section title="专业技能">
                 {skills?.map((item, idx) => {
-                  const content = item.content?.split("\n");
+                  const content = item.content?.split("\n").filter(Boolean);
                   return (
                     <View key={idx} style={{ rowGap: 4 }}>
                       <BWText
