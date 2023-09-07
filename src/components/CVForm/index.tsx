@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import BaseInfoForm from "./BaseInfoForm";
 import { ScrollArea } from "../ui/scroll-area";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import WorkExperienceForm from "./WorkExperienceForm";
 import SkillForm from "./SkillForm";
@@ -16,6 +16,11 @@ import initValues from "@/utils/initValues";
 import EducationForm from "./EducationForm";
 import useOpenKeyStore from "@/store/openKey";
 import useResumeStore from "@/store/resume";
+import { usePDF } from "@react-pdf/renderer";
+import PDFDocument from "../CVTemp/PDFDocument";
+import T1 from "../CVTemp/T1";
+import { DownloadIcon, ViewIcon } from "lucide-react";
+import DownloadBtn from "./DownloadBtn";
 
 const formSchema = z.object({
   avatar: z.string().optional(),
@@ -74,22 +79,33 @@ export type FormValues = z.infer<typeof formSchema>;
 
 export default function CVForm() {
   const changeData = useResumeStore((state) => state.changeData);
-  const data = useResumeStore((state) => state.data);
   const tabOpenKey = useOpenKeyStore((state) => state.tabOpenKey);
   const changeTabOpenKey = useOpenKeyStore((state) => state.changeTabOpenKey);
+
+
+  const resumeRef = useRef(useResumeStore.getState().data);
+
+  // Connect to the store on mount, disconnect on unmount, catch state-changes in a reference
+  useEffect(
+    () => useResumeStore.subscribe((state) => (resumeRef.current = state.data)),
+    [],
+  );
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: data,
+    defaultValues: resumeRef.current,
   });
   const [isFixedTab, setIsFixedTab] = useState(false);
   useEffect(() => {
+    let subscription: any;
     if (process.env.NODE_ENV === "development") {
-      const subscription = form.watch((value) =>
-        changeData(value as FormValues),
-      );
+      subscription = form.watch((value) => {
+        changeData(value as FormValues);
+      });
       return () => subscription.unsubscribe();
     }
   }, [form, changeData]);
+
   useEffect(() => {
     function handleScroll() {
       // 获取滚动的垂直位置
@@ -149,7 +165,10 @@ export default function CVForm() {
             </TabsContent>
           </ScrollArea>
         </Tabs>
-        <Button type="submit">生成PDF</Button>
+        {/* <DownloadBtn /> */}
+        <Button type="submit" className="hidden md:block">
+          生成PDF
+        </Button>
       </form>
     </Form>
   );

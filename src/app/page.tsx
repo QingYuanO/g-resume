@@ -1,5 +1,22 @@
+'use client'
 import CVForm, { FormValues } from "@/components/CVForm";
 import PDFDocument from "@/components/CVTemp/PDFDocument";
+import { Font } from "@react-pdf/renderer";
+
+
+Font.register({
+  family: "NotoSansSC",
+  fonts: [
+    {
+      src: "/font/NotoSansSC-Regular.ttf",
+      fontWeight: "normal",
+    },
+    {
+      src: "/font/NotoSansSC-Bold.ttf",
+      fontWeight: 600,
+    },
+  ],
+});
 
 export default function Home() {
   return (
@@ -7,7 +24,7 @@ export default function Home() {
       <div className="relative col-span-3">
         <CVForm />
       </div>
-      <div className="col-span-3 md:block">
+      <div className="col-span-3 hidden md:block">
         <PDFDocument />
       </div>
     </main>

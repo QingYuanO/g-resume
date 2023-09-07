@@ -6,20 +6,6 @@ import useResumeStore from "@/store/resume";
 import T1 from "./T1";
 import Image from "next/image";
 
-Font.register({
-  family: "NotoSansSC",
-  fonts: [
-    {
-      src: "/font/NotoSansSC-Regular.ttf",
-      fontWeight: "normal",
-    },
-    {
-      src: "/font/NotoSansSC-Bold.ttf",
-      fontWeight: 600,
-    },
-  ],
-});
-
 const PDFDocument = () => {
   const resume = useResumeStore((state) => state.data);
   return (
