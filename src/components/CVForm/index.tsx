@@ -21,6 +21,7 @@ import PDFDocument from "../CVTemp/PDFDocument";
 import T1 from "../CVTemp/T1";
 import { DownloadIcon, ViewIcon } from "lucide-react";
 import DownloadBtn from "./DownloadBtn";
+import { isMobile } from "@/utils";
 
 const formSchema = z.object({
   avatar: z.string().optional(),
@@ -77,11 +78,12 @@ const formSchema = z.object({
 });
 export type FormValues = z.infer<typeof formSchema>;
 
+
+
 export default function CVForm() {
   const changeData = useResumeStore((state) => state.changeData);
   const tabOpenKey = useOpenKeyStore((state) => state.tabOpenKey);
   const changeTabOpenKey = useOpenKeyStore((state) => state.changeTabOpenKey);
-
 
   const resumeRef = useRef(useResumeStore.getState().data);
 
@@ -165,7 +167,7 @@ export default function CVForm() {
             </TabsContent>
           </ScrollArea>
         </Tabs>
-        {/* <DownloadBtn /> */}
+        {isMobile && <DownloadBtn />}
         <Button type="submit" className="hidden md:block">
           生成PDF
         </Button>

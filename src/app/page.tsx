@@ -1,8 +1,8 @@
-'use client'
+"use client";
 import CVForm, { FormValues } from "@/components/CVForm";
 import PDFDocument from "@/components/CVTemp/PDFDocument";
+import { isMobile } from "@/utils";
 import { Font } from "@react-pdf/renderer";
-
 
 Font.register({
   family: "NotoSansSC",
@@ -25,7 +25,7 @@ export default function Home() {
         <CVForm />
       </div>
       <div className="col-span-3 hidden md:block">
-        <PDFDocument />
+        {!isMobile && <PDFDocument />}
       </div>
     </main>
   );
