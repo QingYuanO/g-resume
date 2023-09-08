@@ -64,7 +64,7 @@ const Resume = () => {
           </div>
 
           <Button variant="outline">
-            <PDFDownloadLink document={pdf} fileName={resume.baseInfo.job}>下载</PDFDownloadLink>
+            <DynamicPDFDownloadLink document={pdf} fileName={resume.baseInfo.job}>下载</DynamicPDFDownloadLink>
           </Button>
         </div>
         <div className="absolute bottom-20 w-full border-t-2 bg-gray-50"></div>
@@ -74,3 +74,14 @@ const Resume = () => {
 };
 
 export default Resume;
+const DynamicPDFDownloadLink = dynamic(
+  () => import("@react-pdf/renderer").then((module) => module.PDFDownloadLink),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-full w-full items-center justify-center">
+        <Image src="/Infinity.svg" width={20} height={20} alt="加载中..." />
+      </div>
+    ),
+  },
+);
