@@ -66,7 +66,7 @@ export default function CVForm() {
   //   changeData?.(values);
   // }
   return (
-    <div className="h-full space-y-2 py-4 md:h-screen ">
+    <div className="h-full pt-4 md:h-screen ">
       <Tabs className="" value={tabOpenKey} onValueChange={changeTabOpenKey}>
         <TabsList
           className={cn(

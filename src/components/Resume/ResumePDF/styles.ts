@@ -44,6 +44,7 @@ const globalStyles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#ffffff",
     fontSize: 12,
+    height:'100%'
   },
   flexRow: {
     display: "flex",

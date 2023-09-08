@@ -15,6 +15,8 @@ import globalStyles, { textStyles } from "../styles";
 import BWText from "../BWText";
 import { ResumePDFIcon, IconType } from "../ResumePDFIcon";
 import ResumePDFLink from "../ResumePDFLink";
+import { RESUME_SETTINGS, ResumeType } from "@/constant";
+import { ResumePDFType } from "..";
 
 const styles = StyleSheet.create({});
 
@@ -26,10 +28,9 @@ const lightColor = "#ca3a08";
 const T1 = ({
   resume,
   isPDF = false,
-}: {
-  resume: ResumeSchemaType;
-  isPDF?: boolean;
-}) => {
+  type,
+  height
+}: ResumePDFType) => {
   const { baseInfo, workExperience, skills, education } = resume;
   const {
     avatar,
@@ -43,10 +44,11 @@ const T1 = ({
     introduce,
     customUrls,
   } = baseInfo;
+  const { width } = RESUME_SETTINGS[type];
   return (
     <Document title={job}>
       <Page
-        size={[780, 960]}
+        size={[width, height]}
         style={{
           ...globalStyles.page,
           ...globalStyles.flexCol,
@@ -293,7 +295,7 @@ const T1 = ({
                 contentStyle={{
                   gap: 8,
                   ...globalStyles.flexRow,
-                  flexWrap:'wrap'
+                  flexWrap: "wrap",
                 }}
               >
                 {hobby?.map((item, idx) => {

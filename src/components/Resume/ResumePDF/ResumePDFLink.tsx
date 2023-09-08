@@ -1,5 +1,4 @@
 import ReactPDF, { Link } from "@react-pdf/renderer";
-import type { Style } from "@react-pdf/types";
 
 const ResumePDFLink = ({
   src,
@@ -9,7 +8,7 @@ const ResumePDFLink = ({
 }: {
   src: string;
   isPDF: boolean;
-  style?: Style;
+  style?: Record<string,any>;
   children: React.ReactNode;
 }) => {
   if (isPDF) {
