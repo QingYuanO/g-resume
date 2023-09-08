@@ -5,7 +5,7 @@ import React from "react";
 import Frame from "react-frame-component";
 import { RESUME_SETTINGS, ResumeSetting, ResumeType } from "@/constant";
 
-const isMobile = window?.innerWidth < 768
+// const isMobile = window?.innerWidth < 768
 
 export default function ResumeIframe({
   children,
@@ -19,7 +19,7 @@ export default function ResumeIframe({
   type: ResumeType;
 }) {
   let { scale, width } = RESUME_SETTINGS[type];  
-  isMobile && (scale = scale * 0.5);
+  // isMobile && (scale = scale * 0.5);
   const iframeInitialContent = `<!DOCTYPE html>
   <html style='height:100%'>
     <head>
