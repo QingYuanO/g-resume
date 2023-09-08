@@ -10,10 +10,11 @@ import ReactPDF, {
   Image,
   Link,
 } from "@react-pdf/renderer";
-import BWText from "./BWText";
-import { IconType, ResumePDFIcon } from "../PDFIcon";
-import globalStyles, { textStyles } from "./styles";
-import { FormValues } from "../CVForm";
+import { ResumeSchemaType } from "@/components/ResumeForm/formSchema";
+import globalStyles, { textStyles } from "../styles";
+import BWText from "../BWText";
+import { ResumePDFIcon, IconType } from "../ResumePDFIcon";
+import ResumePDFLink from "../ResumePDFLink";
 
 const styles = StyleSheet.create({});
 
@@ -22,7 +23,14 @@ const secondaryColor = "#475569";
 const grayColor = "#9ca3af";
 const lightColor = "#ca3a08";
 
-const T1 = ({ resume }: { resume: FormValues }) => {
+const T1 = ({
+  resume,
+  isPDF = false,
+}: {
+  resume: ResumeSchemaType;
+  isPDF?: boolean;
+}) => {
+  const { baseInfo, workExperience, skills, education } = resume;
   const {
     avatar,
     name,
@@ -34,37 +42,32 @@ const T1 = ({ resume }: { resume: FormValues }) => {
     hobby,
     introduce,
     customUrls,
-    workExperience,
-    skills,
-    education,
-  } = resume;
-
+  } = baseInfo;
   return (
     <Document title={job}>
       <Page
         size={[780, 960]}
-        style={[
-          globalStyles.page,
-          {
-            backgroundColor: "#f6f8fa",
-            color: primaryColor,
-          },
-        ]}
+        style={{
+          ...globalStyles.page,
+          ...globalStyles.flexCol,
+          backgroundColor: "#f6f8fa",
+          color: primaryColor,
+        }}
       >
         <View
           style={{
             borderTop: `2px solid ${lightColor}`,
             color: "#1e293b",
-            paddingHorizontal: 24,
-            paddingVertical: 24,
+            padding: 24,
             rowGap: 14,
+            ...globalStyles.flexCol,
           }}
         >
-          <View style={{ flexDirection: "row", columnGap: 30 }}>
-            <View style={{ flex: 2, rowGap: 8 }}>
+          <View style={{ ...globalStyles.flexRow, columnGap: 30 }}>
+            <View style={{ ...globalStyles.flexCol, flex: 2, rowGap: 8 }}>
               <View
                 style={{
-                  flexDirection: "row",
+                  ...globalStyles.flexRow,
                   alignItems: "center",
                   columnGap: 12,
                 }}
@@ -77,7 +80,7 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                   />
                 )}
 
-                <View style={{ rowGap: 8 }}>
+                <View style={{ ...globalStyles.flexCol, rowGap: 8 }}>
                   <Text style={{ fontWeight: 800, ...textStyles.lg }}>
                     {name}
                   </Text>
@@ -86,16 +89,17 @@ const T1 = ({ resume }: { resume: FormValues }) => {
               </View>
               <BWText style={textStyles.lg} text={introduce} />
             </View>
-            <View style={{ flex: 1, rowGap: 4 }}>
-              <UrlItem name={jobAddress} icon="location" />
-              <UrlItem name={email} icon="email" />
-              <UrlItem name={phone} icon="phone" />
+            <View style={{ ...globalStyles.flexCol, flex: 1, rowGap: 4 }}>
+              <UrlItem name={jobAddress} icon="location" isPDF={isPDF} />
+              <UrlItem name={email} icon="email" isPDF={isPDF} />
+              <UrlItem name={phone} icon="phone" isPDF={isPDF} />
               {customUrls?.map((item, idx) => {
                 return (
                   <UrlItem
                     key={idx}
                     url={item.url}
                     name={item.name}
+                    isPDF={isPDF}
                     icon={
                       item.name.toLocaleLowerCase() === "github"
                         ? "url_github"
@@ -106,7 +110,7 @@ const T1 = ({ resume }: { resume: FormValues }) => {
               })}
             </View>
           </View>
-          <View style={{ flexDirection: "row", columnGap: 30 }}>
+          <View style={{ ...globalStyles.flexRow, columnGap: 30 }}>
             <Section
               title="工作经历"
               style={{
@@ -114,11 +118,14 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                 paddingTop: 14,
                 borderTop: "1px solid #cbd5e1",
                 rowGap: 14,
+                ...globalStyles.flexCol,
               }}
             >
               {workExperience?.map((item, idx) => {
                 const rangeTimeNode = (
-                  <View style={{ flex: 0.8, rowGap: 12 }}>
+                  <View
+                    style={{ ...globalStyles.flexCol, flex: 0.8, rowGap: 12 }}
+                  >
                     <View
                       style={{
                         height: 3,
@@ -136,22 +143,20 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                   <View
                     style={{
                       color: grayColor,
-                      // ...textStyles.lg,
-                      flexDirection: "row",
-                      justifyContent: "space-between",
+                      ...globalStyles.flexRowBetween,
                     }}
                   >
                     <Text>{item.company}</Text>
                     <View
                       style={{
-                        flexDirection: "row",
+                        ...globalStyles.flexRow,
                         alignItems: "center",
                         columnGap: 4,
                       }}
                     >
                       <ResumePDFIcon
                         type="location"
-                        isPDF
+                        isPDF={isPDF}
                         style={{ fill: grayColor }}
                       />
                       <Text>{item.position}</Text>
@@ -160,12 +165,14 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                 );
                 return (
                   <View
-                    style={[{ flexDirection: "row", columnGap: 10 }]}
+                    style={{ ...globalStyles.flexRow, columnGap: 10 }}
                     key={idx}
                     wrap={false}
                   >
                     {rangeTimeNode}
-                    <View style={{ flex: 4.2, rowGap: 4 }}>
+                    <View
+                      style={{ ...globalStyles.flexCol, flex: 4.2, rowGap: 4 }}
+                    >
                       <BWText
                         style={{
                           color: lightColor,
@@ -175,9 +182,14 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                       />
                       {companyNode}
                       {item.projects.map((project, idx) => {
-                        const content = project.content?.split("\n").filter(Boolean);
+                        const content = project.content
+                          ?.split("\n")
+                          .filter(Boolean);
                         return (
-                          <View key={idx} style={{ rowGap: 2 }}>
+                          <View
+                            key={idx}
+                            style={{ ...globalStyles.flexCol, rowGap: 2 }}
+                          >
                             <BWText
                               style={{
                                 fontWeight: 600,
@@ -206,13 +218,17 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                 paddingTop: 14,
                 borderTop: "1px solid #cbd5e1",
                 rowGap: 14,
+                ...globalStyles.flexCol,
               }}
             >
               <Section title="专业技能">
                 {skills?.map((item, idx) => {
                   const content = item.content?.split("\n").filter(Boolean);
                   return (
-                    <View key={idx} style={{ rowGap: 4 }}>
+                    <View
+                      key={idx}
+                      style={{ ...globalStyles.flexCol, rowGap: 4 }}
+                    >
                       <BWText
                         style={{
                           color: lightColor,
@@ -228,7 +244,10 @@ const T1 = ({ resume }: { resume: FormValues }) => {
               <Section title="教育经历">
                 {education?.map((item, idx) => {
                   return (
-                    <View key={idx} style={{ rowGap: 4 }}>
+                    <View
+                      key={idx}
+                      style={{ ...globalStyles.flexCol, rowGap: 4 }}
+                    >
                       <BWText
                         style={{
                           color: lightColor,
@@ -242,7 +261,7 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                         </Text>
                         <View
                           style={{
-                            flexDirection: "row",
+                            ...globalStyles.flexRow,
                             columnGap: 2,
                             flexWrap: "wrap",
                             color: grayColor,
@@ -251,14 +270,14 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                           <Text>{item.school}</Text>
                           <View
                             style={{
-                              flexDirection: "row",
+                              ...globalStyles.flexRow,
                               alignItems: "center",
                               columnGap: 2,
                             }}
                           >
                             <ResumePDFIcon
                               type="major"
-                              isPDF
+                              isPDF={isPDF}
                               style={{ fill: grayColor }}
                             />
                             <Text>{item.major}</Text>
@@ -271,15 +290,18 @@ const T1 = ({ resume }: { resume: FormValues }) => {
               </Section>
               <Section
                 title="爱好"
-                contentStyle={{ gap: 8, flexDirection: "row" }}
+                contentStyle={{
+                  gap: 8,
+                  ...globalStyles.flexRow,
+                  flexWrap:'wrap'
+                }}
               >
                 {hobby?.map((item, idx) => {
                   return (
                     <View
                       key={idx}
                       style={{
-                        paddingHorizontal: 8,
-                        paddingVertical: 3,
+                        padding: "3pt 8pt",
                         border: `1px solid ${lightColor}`,
                         borderRadius: 4,
                       }}
@@ -303,8 +325,7 @@ const T1 = ({ resume }: { resume: FormValues }) => {
                     <View
                       key={idx}
                       style={{
-                        paddingHorizontal: 8,
-                        paddingVertical: 3,
+                        padding: "3pt 8pt",
                         border: `1px solid ${lightColor}`,
                         borderRadius: 4,
                       }}
@@ -329,21 +350,29 @@ const T1 = ({ resume }: { resume: FormValues }) => {
 
 export default T1;
 
-const UrlItem = (props: { name?: string; url?: string; icon: IconType }) => {
-  const { name = "-", url, icon } = props;
+const UrlItem = (props: {
+  name?: string;
+  url?: string;
+  icon: IconType;
+  isPDF?: boolean;
+}) => {
+  const { name = "-", url, icon, isPDF = false } = props;
   return (
-    <View style={{ flexDirection: "row", columnGap: 4, alignItems: "center" }}>
-      <ResumePDFIcon type={icon} isPDF />
+    <View
+      style={{ ...globalStyles.flexRow, columnGap: 4, alignItems: "center" }}
+    >
+      <ResumePDFIcon type={icon} isPDF={isPDF} />
       {url ? (
-        <Link
+        <ResumePDFLink
           src={url}
+          isPDF={isPDF}
           style={{
             alignSelf: "flex-start",
             color: primaryColor,
           }}
         >
           {name}
-        </Link>
+        </ResumePDFLink>
       ) : (
         <Text>{name}</Text>
       )}
@@ -360,7 +389,7 @@ const ContentList = ({ content }: { content?: string[] }) => {
           <View
             key={i}
             style={{
-              flexDirection: "row",
+              ...globalStyles.flexRow,
               columnGap: 5,
               alignItems: "flex-start",
             }}
@@ -399,11 +428,18 @@ const Section = ({
   title?: string;
 }>) => {
   return (
-    <View style={{ rowGap: 10, ...style }} wrap={false}>
+    <View
+      style={{ rowGap: 10, ...globalStyles.flexCol, ...style }}
+      wrap={false}
+    >
       {title && (
-        <Text style={[textStyles.lg, { fontWeight: "semibold" }]}>{title}</Text>
+        <Text style={{ ...textStyles.lg, fontWeight: "semibold" }}>
+          {title}
+        </Text>
       )}
-      <View style={{ rowGap: 10, ...contentStyle }}>{children}</View>
+      <View style={{ rowGap: 10, ...globalStyles.flexCol, ...contentStyle }}>
+        {children}
+      </View>
     </View>
   );
 };

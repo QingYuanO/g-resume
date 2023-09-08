@@ -1,7 +1,6 @@
 "use client";
-import CVForm, { FormValues } from "@/components/CVForm";
-import PDFDocument from "@/components/CVTemp/PDFDocument";
-import { isMobile } from "@/utils";
+import ResumeForm from "@/components/ResumeForm";
+import Resume from "@/components/Resume";
 import { Font } from "@react-pdf/renderer";
 
 Font.register({
@@ -20,12 +19,12 @@ Font.register({
 
 export default function Home() {
   return (
-    <main className="container relative grid grid-cols-3 gap-x-4 md:grid-cols-6">
-      <div className="relative col-span-3">
-        <CVForm />
+    <main className="container relative grid grid-cols-3 gap-x-4 md:grid-cols-7">
+      <div className="relative col-span-3 md:col-span-3">
+        <ResumeForm />
       </div>
-      <div className="col-span-3 hidden md:block">
-        {!isMobile && <PDFDocument />}
+      <div className="col-span-3 hidden md:col-span-4 md:block">
+        <Resume />
       </div>
     </main>
   );

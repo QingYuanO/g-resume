@@ -1,19 +1,24 @@
-import { FormValues } from "@/components/CVForm";
+import { ResumeSchemaType } from "@/components/ResumeForm/formSchema";
 
-const initValues: FormValues = {
-  name: "陈守园",
-  job: "前端开发工程师",
-  jobAddress: "深圳",
-  phone: "13933332066",
-  email: "qingyuano@foxmail.com",
-  birthday: "1998-02",
-  weChat: "123",
-  introduce:
-    "四年前端开发经验，对 React 以及周边⽣态系统有⽐较深⼊的了解，拥有丰富的实战经验，对前端开发领域拥有极⼤的热情与兴趣，喜欢探索未知。",
-  customUrls: [
-    { name: "Github", url: "https://github.com/chen-shouyuan" },
-    { name: "掘金", url: "https://github.com/QingYuanO" },
-  ],
+const initValues: ResumeSchemaType = {
+  baseInfo: {
+    name: "陈守园",
+    job: "前端开发工程师",
+    jobAddress: "深圳",
+    phone: "13933332066",
+    email: "qingyuano@foxmail.com",
+    birthday: "1998-02",
+    weChat: "123",
+    introduce:
+      "四年前端开发经验，对 React 以及周边⽣态系统有⽐较深⼊的了解，拥有丰富的实战经验，对前端开发领域拥有极⼤的热情与兴趣，喜欢探索未知。",
+    customUrls: [
+      { name: "Github", url: "https://github.com/chen-shouyuan" },
+      { name: "掘金", url: "https://github.com/QingYuanO" },
+    ],
+    hobby: ["阅读", "爬山", "跑步", "骑行"],
+    certificate: ["计算机C语言二级"],
+  },
+
   workExperience: [
     {
       company: "深圳瑞赛网络科技有限公司",
@@ -102,7 +107,5 @@ const initValues: FormValues = {
       rangeDate: "2016/09 - 2020/07",
     },
   ],
-  hobby: ["阅读", "爬山", "跑步", "骑行"],
-  certificate: ["计算机C语言二级"],
 };
 export default initValues;

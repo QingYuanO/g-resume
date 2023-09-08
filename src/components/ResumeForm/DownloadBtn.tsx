@@ -6,7 +6,7 @@ import useResumeStore from "@/store/resume";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useFormContext } from "react-hook-form";
 import { FormValues } from ".";
-import T1 from "../CVTemp/T1";
+import T1 from "../Resume/T1";
 
 export default function DownloadBtn() {
   const changeData = useResumeStore((state) => state.changeData);

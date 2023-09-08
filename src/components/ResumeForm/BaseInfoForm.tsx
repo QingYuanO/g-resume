@@ -1,7 +1,11 @@
 "use client";
-import { useFieldArray, useFormContext } from "react-hook-form";
-import { FormValues } from ".";
-import BaseInfoFormItem, { FieldOption } from "./BasicFormItem";
+import {
+  FieldPath,
+  useFieldArray,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
+import BaseInfoFormItem from "./BasicFormItem";
 import {
   Card,
   CardContent,
@@ -11,98 +15,122 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { FormField } from "@/components/ui/form";
+import { FormField, Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MinusCircle, X } from "lucide-react";
-import UploadAvatar from "../UploadAvatar";
+import UploadAvatar from "./UploadAvatar";
+import { BaseInfoSchemaType, baseInfoSchema } from "./formSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useResumeStore from "@/store/resume";
+import { useSyncFields } from "./hooks";
+
+export type FieldOption = {
+  name: FieldPath<BaseInfoSchemaType>;
+  label: string;
+  type: "input" | "select" | "textarea";
+  rows?: number;
+};
 
 const baseInfoFields: FieldOption[] = [
   {
-    name: "job",
+    name: "baseInfo.job",
     label: "职位名称",
     type: "input",
   },
   {
-    name: "name",
+    name: "baseInfo.name",
     label: "姓名",
     type: "input",
   },
   {
-    name: "jobAddress",
+    name: "baseInfo.jobAddress",
     label: "工作地点",
     type: "input",
   },
   {
-    name: "phone",
+    name: "baseInfo.phone",
     label: "手机号码",
     type: "input",
   },
   {
-    name: "email",
+    name: "baseInfo.email",
     label: "邮箱",
     type: "input",
   },
   {
-    name: "birthday",
+    name: "baseInfo.birthday",
     label: "出生日期",
     type: "input",
   },
   {
-    name: "weChat",
+    name: "baseInfo.weChat",
     label: "微信号",
     type: "input",
   },
 ];
 
 export default function BaseInfoForm() {
-  const form = useFormContext<FormValues>();
-
+  const baseInfo = useResumeStore((state) => state.baseInfo);
+  // const form = useForm<BaseInfoSchemaType>({
+  //   resolver: zodResolver(baseInfoSchema),
+  //   defaultValues: { baseInfo },
+  // });
+  const form = useSyncFields(baseInfoSchema, { baseInfo });
   return (
-    <div className="flex flex-col gap-y-3">
-      <Card className="">
-        <CardHeader className="p-4">
-          <CardTitle className="text-lg">个人信息</CardTitle>
-          <CardDescription>包含你的个人信息以及联系方式</CardDescription>
-        </CardHeader>
-        <CardContent className="grid grid-cols-3 gap-x-8 gap-y-2 px-4 md:grid-cols-6">
-          {baseInfoFields.map((field) => (
-            <BaseInfoFormItem
-              key={field.name}
-              {...field}
-              className=" col-span-3"
+    <Form {...form}>
+      <form className="flex flex-col gap-y-3">
+        <Card className="">
+          <CardHeader className="p-4">
+            <CardTitle className="text-lg">个人信息</CardTitle>
+            <CardDescription>包含你的个人信息以及联系方式</CardDescription>
+          </CardHeader>
+          <CardContent className="grid grid-cols-3 gap-x-8 gap-y-2 px-4 md:grid-cols-6">
+            {baseInfoFields.map((field) => (
+              <BaseInfoFormItem
+                key={field.name}
+                form={form}
+                {...field}
+                className=" col-span-3"
+              />
+            ))}
+            <UploadAvatar
+              onSuccess={(img) => form.setValue("baseInfo.avatar", img)}
             />
-          ))}
-          <UploadAvatar onSuccess={img => form.setValue("avatar", img)} />
-        </CardContent>
-      </Card>
-      <CustomUrls />
-      <Card className="">
-        <CardHeader className="p-4">
-          <CardTitle className="text-lg">个人简介</CardTitle>
-        </CardHeader>
-        <CardContent className="px-4">
-          <FormField
-            control={form.control}
-            name="introduce"
-            render={({ field }) => (
-              <Textarea placeholder="请输入个人简介" rows={5} {...field} />
-            )}
-          />
-        </CardContent>
-      </Card>
-      <CommonListTags name="hobby" key="hobby" title="爱好" />
-      <CommonListTags name="certificate" key="certificate" title="证书" />
-    </div>
+          </CardContent>
+        </Card>
+        <CustomUrls />
+        <Card className="">
+          <CardHeader className="p-4">
+            <CardTitle className="text-lg">个人简介</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4">
+            <FormField
+              control={form.control}
+              name="baseInfo.introduce"
+              render={({ field }) => (
+                <Textarea placeholder="请输入个人简介" rows={5} {...field} />
+              )}
+            />
+          </CardContent>
+        </Card>
+        <CommonListTags name="baseInfo.hobby" key="hobby" title="爱好" />
+        <CommonListTags
+          name="baseInfo.certificate"
+          key="certificate"
+          title="证书"
+        />
+      </form>
+    </Form>
   );
 }
 
 const CommonListTags = (props: {
-  name: "hobby" | "certificate";
+  name: "baseInfo.hobby" | "baseInfo.certificate";
   title: string;
 }) => {
   const { name, title } = props;
-  const form = useFormContext<FormValues>();
+  const form = useFormContext<BaseInfoSchemaType>();
   return (
     <Card className="">
       <CardHeader className="p-4">
@@ -158,10 +186,10 @@ const CommonListTags = (props: {
 };
 
 const CustomUrls = () => {
-  const form = useFormContext<FormValues>();
+  const form = useFormContext<BaseInfoSchemaType>();
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "customUrls",
+    name: "baseInfo.customUrls",
   });
   const onAddCustomUrls = () => {
     append({ name: "", url: "" });
@@ -179,9 +207,12 @@ const CustomUrls = () => {
               {/* {item.name}-{item.url} */}
               <Input
                 className="w-1/3"
-                {...form.register(`customUrls.${index}.name`)}
+                {...form.register(`baseInfo.customUrls.${index}.name`)}
               />
-              <Input {...form.register(`customUrls.${index}.url`)} type="url" />
+              <Input
+                {...form.register(`baseInfo.customUrls.${index}.url`)}
+                type="url"
+              />
               <MinusCircle
                 className=" cursor-pointer text-red-500"
                 onClick={() => remove(index)}

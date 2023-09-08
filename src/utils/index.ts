@@ -8,10 +8,3 @@ export function bw(word: string) {
     return w + " ";
   });
 }
-
-
-//判断当前环境是否是手机
-export const isMobile =
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent,
-  );
