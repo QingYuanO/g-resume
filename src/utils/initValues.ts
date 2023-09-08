@@ -74,19 +74,6 @@ const initValues: ResumeSchemaType = {
         },
       ],
     },
-    {
-      company: "⼴西盛源⾏电⼦信息股份有限公司",
-      jobName: "前端开发工程师",
-      position: "⼴西柳州",
-      rangeDate: "2019/07 - 2020/06",
-      projects: [
-        {
-          name: "东⻛⻛⾏移动⻔⼾",
-          description:
-            "项⽬是⼀个混合App，主要业务是实现⼀个移动端的⻋辆客服中⼼系统，对⻋主的来电进⾏处理。 使⽤的技术主要有 jQuery、Bootstrap，我的主要⼯作是编写响应式移动端⻚⾯。",
-        },
-      ],
-    },
   ],
   skills: [
     {

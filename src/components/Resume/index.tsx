@@ -33,7 +33,7 @@ const Resume = () => {
     () => <ResumePDF resume={resume} type={type} isPDF={isPDF} height={height} />,
     [resume,height],
   );
-  const setDebounceHeight =  throttle((v:number) => {    
+  const setDebounceHeight =  throttle((v:number) => {
     setHeight(v)
   },800,{
     trailing:false,

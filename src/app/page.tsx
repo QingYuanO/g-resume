@@ -23,7 +23,7 @@ export default function Home() {
       <div className="relative col-span-3 md:col-span-3">
         <ResumeForm />
       </div>
-      <div className="col-span-3 hidden md:col-span-4 md:block">
+      <div className="col-span-3 md:col-span-4 md:block">
         <Resume />
       </div>
     </main>

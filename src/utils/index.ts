@@ -8,3 +8,5 @@ export function bw(word: string) {
     return w + " ";
   });
 }
+
+
