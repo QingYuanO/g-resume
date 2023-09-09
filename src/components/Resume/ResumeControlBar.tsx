@@ -1,7 +1,7 @@
 import resume from "@/store/resume";
 
-import { pdf } from "@react-pdf/renderer";
-import React, { ReactElement } from "react";
+import { pdf, usePDF } from "@react-pdf/renderer";
+import React, { ReactElement, useEffect } from "react";
 import { Label } from "../ui/label";
 import { Slider } from "../ui/slider";
 import Image from "next/image";
@@ -16,6 +16,13 @@ export default function ResumeControlBar(props: {
   setHeight: (height: number) => void;
 }) {
   const { document, height, setHeight, fileName } = props;
+
+  const [instance, update] = usePDF({ document });
+
+  // Hook to update pdf when document changes
+  useEffect(() => {
+    update(document);
+  }, [update, document]);
   const setDebounceHeight = throttle(
     (v: number) => {
       setHeight(v);
@@ -43,9 +50,9 @@ export default function ResumeControlBar(props: {
       </div>
 
       <Button variant="outline">
-        <DynamicPDFDownloadLink document={document} fileName={fileName}>
+        <a href={instance.url!} download={fileName}>
           下载
-        </DynamicPDFDownloadLink>
+        </a>
       </Button>
     </div>
   );

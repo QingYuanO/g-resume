@@ -1,4 +1,9 @@
-import { DefaultValues, FieldValues, UseFormReturn, useForm } from "react-hook-form";
+import {
+  DefaultValues,
+  FieldValues,
+  UseFormReturn,
+  useForm,
+} from "react-hook-form";
 import {
   BaseInfoSchemaType,
   EducationSchemaType,
@@ -9,9 +14,9 @@ import {
 } from "./formSchema";
 import { useEffect } from "react";
 import useResumeStore from "@/store/resume";
-import { getProperty } from "dot-prop";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodType } from "zod";
+import { at } from "lodash-es";
 
 function useSyncFields<
   T extends
@@ -19,7 +24,7 @@ function useSyncFields<
     | EducationSchemaType
     | SkillsSchemaType
     | WorkExperienceSchemaType,
->(schema: ZodType<T>, initData: DefaultValues<T>  ) {
+>(schema: ZodType<T>, initData: DefaultValues<T>) {
   const changeData = useResumeStore((state) => state.changeData);
   const form = useForm<T>({
     resolver: zodResolver(schema),
@@ -27,13 +32,16 @@ function useSyncFields<
   });
   useEffect(() => {
     const subscription = form.watch((value, { name, type }) => {
-      if (name && value) {
-        changeData({ field: name, value: getProperty(value, name) });
-      }
+      const formatName = (name ?? "")
+        .split(".")
+        .map((item) => (/^-?\d+$/.test(item) ? `[${item}]` : item))
+        .join(".");
+
+      changeData({ field: formatName, value: at(value, formatName)[0] });
     });
     return () => subscription.unsubscribe();
   }, [form, changeData]);
-  return form
+  return form;
 }
 
 export { useSyncFields };

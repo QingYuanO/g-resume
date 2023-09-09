@@ -7,14 +7,16 @@ import {
   WorkExperienceSchemaType,
 } from "@/components/ResumeForm/formSchema";
 import initValues from "@/utils/initValues";
-import { setProperty } from "dot-prop";
+import { cloneDeep } from "lodash-es";
 import { FieldPath, FieldValues } from "react-hook-form";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import {set} from 'lodash-es'
+let lodashSet = set
 
 type ChangeParams<T extends FieldValues> = {
-  field: FieldPath<T>;
+  field: string;
   value: any;
 };
 
@@ -23,24 +25,24 @@ type ResumeStore = {
 } & ResumeSchemaType;
 
 const useResumeStore = create<ResumeStore>()(
-  immer(
-    persist(
-      (set) => ({
-        baseInfo: initValues.baseInfo,
-        workExperience: initValues.workExperience,
-        education: initValues.education,
-        skills: initValues.skills,
-        changeData: (params) => {
-          set((state) => {
-            setProperty(state, params.field, params.value);
-          });
-        },
-      }),
-      {
-        name: "resumeStore ",
-        storage: createJSONStorage(() => localStorage),
+  persist(
+    (set) => ({
+      baseInfo: initValues.baseInfo,
+      workExperience: initValues.workExperience,
+      education: initValues.education,
+      skills: initValues.skills,
+      changeData: (params) => {
+        // console.log(params);
+        
+        set((state) => {          
+          return cloneDeep(lodashSet(state, params.field, params.value));
+        });
       },
-    ),
+    }),
+    {
+      name: "resumeStore ",
+      storage: createJSONStorage(() => localStorage),
+    },
   ),
 );
 

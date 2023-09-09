@@ -2,13 +2,16 @@
 import React from "react";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
+import useResumeStore from "@/store/resume";
 
 export default function UploadAvatar({
   onSuccess,
 }: {
   onSuccess?: (img: string) => void;
 }) {
+  const changeData = useResumeStore((state) => state.changeData);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    
     if (e.target.files) {
       let file = e.target.files[0];
       //首先判断是否是图片
@@ -37,6 +40,7 @@ export default function UploadAvatar({
         console.log(url);
         if (url) {
           onSuccess?.(url as string);
+          changeData({field:'baseInfo.avatar', value: url as string});
         }
       };
     }

@@ -47,9 +47,6 @@ dependencies:
   date-fns:
     specifier: ^2.30.0
     version: registry.npmmirror.com/date-fns@2.30.0
-  dot-prop:
-    specifier: ^8.0.2
-    version: registry.npmmirror.com/dot-prop@8.0.2
   immer:
     specifier: ^10.0.2
     version: registry.npmmirror.com/immer@10.0.2
@@ -2413,15 +2410,6 @@ packages:
     dependencies:
       esutils: registry.npmmirror.com/esutils@2.0.3
     dev: true
-
-  registry.npmmirror.com/dot-prop@8.0.2:
-    resolution: {integrity: sha512-xaBe6ZT4DHPkg0k4Ytbvn5xoxgpG0jOS1dYxSOwAHPuNLjP3/OzN0gH55SrLqpx8cBfSaVt91lXYkApjb+nYdQ==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/dot-prop/-/dot-prop-8.0.2.tgz}
-    name: dot-prop
-    version: 8.0.2
-    engines: {node: '>=16'}
-    dependencies:
-      type-fest: registry.npmmirror.com/type-fest@3.13.1
-    dev: false
 
   registry.npmmirror.com/electron-to-chromium@1.4.508:
     resolution: {integrity: sha512-FFa8QKjQK/A5QuFr2167myhMesGrhlOBD+3cYNxO9/S4XzHEXesyTD/1/xF644gC8buFPz3ca6G1LOQD0tZrrg==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.508.tgz}
@@ -5081,13 +5069,6 @@ packages:
     version: 0.20.2
     engines: {node: '>=10'}
     dev: true
-
-  registry.npmmirror.com/type-fest@3.13.1:
-    resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/type-fest/-/type-fest-3.13.1.tgz}
-    name: type-fest
-    version: 3.13.1
-    engines: {node: '>=14.16'}
-    dev: false
 
   registry.npmmirror.com/typed-array-buffer@1.0.0:
     resolution: {integrity: sha512-Y8KTSIglk9OZEr8zywiIHG/kmQ7KWyjseXs1CbSo8vC42w7hg2HgYTxSWwP0+is7bWDc1H+Fo026CpHFwm8tkw==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/typed-array-buffer/-/typed-array-buffer-1.0.0.tgz}

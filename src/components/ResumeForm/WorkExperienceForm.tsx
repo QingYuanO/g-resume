@@ -2,7 +2,6 @@
 import {
   FieldPath,
   useFieldArray,
-  useForm,
   useFormContext,
 } from "react-hook-form";
 import { PlusIcon } from "lucide-react";
@@ -24,11 +23,8 @@ import { Button } from "../ui/button";
 import PopoverConfirm from "../PopoverConfirm";
 import useOpenKeyStore from "@/store/openKey";
 import { WorkExperienceSchemaType, workExperienceSchema } from "./formSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "../ui/form";
 import useResumeStore from "@/store/resume";
-import { useEffect } from "react";
-import { getProperty } from "dot-prop";
 import { useSyncFields } from "./hooks";
 
 export default function WorkExperienceForm() {

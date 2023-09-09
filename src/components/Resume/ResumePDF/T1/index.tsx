@@ -17,6 +17,7 @@ import { ResumePDFIcon, IconType } from "../ResumePDFIcon";
 import ResumePDFLink from "../ResumePDFLink";
 import { RESUME_SETTINGS, ResumeType } from "@/constant";
 import { ResumePDFType } from "..";
+import ResumePDFImage from "../ResumePDFImage";
 
 const styles = StyleSheet.create({});
 
@@ -25,12 +26,7 @@ const secondaryColor = "#475569";
 const grayColor = "#9ca3af";
 const lightColor = "#ca3a08";
 
-const T1 = ({
-  resume,
-  isPDF = false,
-  type,
-  height
-}: ResumePDFType) => {
+const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
   const { baseInfo, workExperience, skills, education } = resume;
   const {
     avatar,
@@ -75,10 +71,15 @@ const T1 = ({
                 }}
               >
                 {avatar && (
-                  <Image
-                    style={{ width: 50, height: 50, borderRadius: "50% " }}
+                  // <Image
+                  //   style={{ width: 50, height: 50, borderRadius: "50% " }}
+                  //   src={avatar}
+                  //   source={new Buffer(avatar, "base64")}
+                  // />
+                  <ResumePDFImage
+                    isPDF={isPDF}
                     src={avatar}
-                    source={new Buffer(avatar, "base64")}
+                    style={{ width: 50, height: 50, borderRadius: "50% " }}
                   />
                 )}
 

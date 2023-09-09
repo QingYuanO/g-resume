@@ -23,7 +23,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
-    "dot-prop": "^8.0.2",
     "immer": "^10.0.2",
     "install": "^0.13.0",
     "lodash-es": "^4.17.21",

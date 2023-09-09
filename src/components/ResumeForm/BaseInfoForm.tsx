@@ -79,7 +79,7 @@ export default function BaseInfoForm() {
   const form = useSyncFields(baseInfoSchema, { baseInfo });
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-y-3">
+      <div className="flex flex-col gap-y-3">
         <Card className="">
           <CardHeader className="p-4">
             <CardTitle className="text-lg">个人信息</CardTitle>
@@ -94,9 +94,7 @@ export default function BaseInfoForm() {
                 className=" col-span-3"
               />
             ))}
-            <UploadAvatar
-              onSuccess={(img) => form.setValue("baseInfo.avatar", img)}
-            />
+            <UploadAvatar />
           </CardContent>
         </Card>
         <CustomUrls />
@@ -120,7 +118,7 @@ export default function BaseInfoForm() {
           key="certificate"
           title="证书"
         />
-      </form>
+      </div>
     </Form>
   );
 }
