@@ -36,6 +36,7 @@
     "react-dom": "^18.2.0",
     "react-frame-component": "^5.2.6",
     "react-hook-form": "^7.45.4",
+    "react-responsive": "^9.0.2",
     "tailwind-merge": "^1.14.0",
     "zod": "^3.21.4",
     "zustand": "^4.4.1"
