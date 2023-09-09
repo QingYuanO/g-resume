@@ -1,5 +1,3 @@
-import resume from "@/store/resume";
-
 import { pdf, usePDF } from "@react-pdf/renderer";
 import React, { ReactElement, useEffect } from "react";
 import { Label } from "../ui/label";
@@ -8,6 +6,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
 import { throttle } from "lodash-es";
+import { Loader2 } from "lucide-react";
 
 export default function ResumeControlBar(props: {
   document: ReactElement;
@@ -48,27 +47,20 @@ export default function ResumeControlBar(props: {
           onValueChange={(v) => handleHeightChange(v[0])}
         />
       </div>
-
-      <Button variant="outline" asChild>
-        <a href={instance.url!} download={fileName}>
-          下载
-        </a>
-      </Button>
+      <div className="flex items-center">
+        <div className="mr-2 h-4 w-4 ">
+          {instance.loading && <Loader2 className="h-4 w-4 animate-spin" />}
+        </div>
+        <Button variant="outline" asChild>
+          <a href={instance.url!} download={fileName}>
+            下载
+          </a>
+        </Button>
+      </div>
     </div>
   );
 }
 
-const DynamicPDFDownloadLink = dynamic(
-  () => import("@react-pdf/renderer").then((module) => module.PDFDownloadLink),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex h-full w-full items-center justify-center">
-        <Image src="/Infinity.svg" width={20} height={20} alt="加载中..." />
-      </div>
-    ),
-  },
-);
 
 export const ResumeControlBarCSR = dynamic(
   () => Promise.resolve(ResumeControlBar),
