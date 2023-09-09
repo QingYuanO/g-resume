@@ -1,7 +1,7 @@
 "use client";
 import { PlusIcon } from "lucide-react";
 import React from "react";
-import { useFormContext, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 import PopoverConfirm from "../PopoverConfirm";
 import {
   Card,
@@ -19,8 +19,7 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import { Button } from "../ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { EducationSchemaType, educationSchema } from "./formSchema";
+import { educationSchema } from "./formSchema";
 import { Form } from "../ui/form";
 import useResumeStore from "@/store/resume";
 import { useSyncFields } from "./hooks";

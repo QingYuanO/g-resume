@@ -1,22 +1,9 @@
 "use client";
-/* eslint-disable jsx-a11y/alt-text */
-import {
-  StyleSheet,
-  Font,
-  PDFViewer,
-  PDFDownloadLink,
-} from "@react-pdf/renderer";
-import dynamic from "next/dynamic";
 import useResumeStore from "@/store/resume";
-import Image from "next/image";
 import ResumePDF from "./ResumePDF";
 import { ResumeIframeCSR } from "./ResumeIframe";
-import { Button } from "../ui/button";
-import { useMemo, useState, useTransition } from "react";
+import { useMemo, useState } from "react";
 import { RESUME_SETTINGS } from "@/constant";
-import { Label } from "../ui/label";
-import { Slider } from "../ui/slider";
-import { debounce, throttle } from "lodash-es";
 import { ResumeControlBarCSR } from "./ResumeControlBar";
 
 const isPDF = false;

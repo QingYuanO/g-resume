@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { PropsWithChildren } from "react";
 import ReactPDF, {
   Page,
@@ -6,20 +5,14 @@ import ReactPDF, {
   View,
   Document,
   StyleSheet,
-  PDFViewer,
-  Image,
-  Link,
 } from "@react-pdf/renderer";
-import { ResumeSchemaType } from "@/components/ResumeForm/formSchema";
 import globalStyles, { textStyles } from "../styles";
 import BWText from "../BWText";
 import { ResumePDFIcon, IconType } from "../ResumePDFIcon";
 import ResumePDFLink from "../ResumePDFLink";
-import { RESUME_SETTINGS, ResumeType } from "@/constant";
+import { RESUME_SETTINGS } from "@/constant";
 import { ResumePDFType } from "..";
 import ResumePDFImage from "../ResumePDFImage";
-
-const styles = StyleSheet.create({});
 
 const primaryColor = "#1e293b";
 const secondaryColor = "#475569";
@@ -71,11 +64,6 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
                 }}
               >
                 {avatar && (
-                  // <Image
-                  //   style={{ width: 50, height: 50, borderRadius: "50% " }}
-                  //   src={avatar}
-                  //   source={new Buffer(avatar, "base64")}
-                  // />
                   <ResumePDFImage
                     isPDF={isPDF}
                     src={avatar}
@@ -299,49 +287,13 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
                   flexWrap: "wrap",
                 }}
               >
-                {hobby?.map((item, idx) => {
-                  return (
-                    <View
-                      key={idx}
-                      style={{
-                        padding: "3pt 8pt",
-                        border: `1px solid ${lightColor}`,
-                        borderRadius: 4,
-                      }}
-                    >
-                      <BWText
-                        style={{
-                          color: lightColor,
-                        }}
-                        text={item}
-                      />
-                    </View>
-                  );
-                })}
+                {hobby?.map((item, idx) => <Tag tag={item} key={idx}/>)}
               </Section>
               <Section
                 title="证书"
                 contentStyle={{ gap: 8, flexDirection: "row" }}
               >
-                {certificate?.map((item, idx) => {
-                  return (
-                    <View
-                      key={idx}
-                      style={{
-                        padding: "3pt 8pt",
-                        border: `1px solid ${lightColor}`,
-                        borderRadius: 4,
-                      }}
-                    >
-                      <BWText
-                        style={{
-                          color: lightColor,
-                        }}
-                        text={item}
-                      />
-                    </View>
-                  );
-                })}
+                {certificate?.map((item, idx) => <Tag tag={item} key={idx}/>)}
               </Section>
             </Section>
           </View>
@@ -416,6 +368,24 @@ const ContentList = ({ content }: { content?: string[] }) => {
           </View>
         );
       })}
+    </View>
+  );
+};
+const Tag = ({ tag }: { tag: string }) => {
+  return (
+    <View
+      style={{
+        padding: "3pt 8pt",
+        border: `1px solid ${lightColor}`,
+        borderRadius: 4,
+      }}
+    >
+      <BWText
+        style={{
+          color: lightColor,
+        }}
+        text={tag}
+      />
     </View>
   );
 };

@@ -23,26 +23,7 @@ export default function SkillForm() {
   const changeSkillsOpenKey = useOpenKeyStore(
     (state) => state.changeSkillsOpenKey,
   );
-  const changeData = useResumeStore((state) => state.changeData);
   const form = useSyncFields(skillsSchema, { skills });
-  // const form = useForm<SkillsSchemaType>({
-  //   resolver: zodResolver(skillsSchema),
-  //   defaultValues: { skills },
-  // });
-  // useEffect(() => {
-  //   const subscription = form.watch((value, { name, type }) => {
-  //     if (name && value) {
-        
-  //       const formatName = name
-  //       .split(".")
-  //       .map((item) => (/^-?\d+$/.test(item) ? `[${item}]` : item))
-  //       .join(".");
-        
-  //       changeData({ field: formatName, value: at(value, formatName)[0] });
-  //     }
-  //   });
-  //   return () => subscription.unsubscribe();
-  // }, [form, changeData]);
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,

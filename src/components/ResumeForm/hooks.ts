@@ -1,16 +1,12 @@
 import {
   DefaultValues,
-  FieldValues,
-  UseFormReturn,
   useForm,
 } from "react-hook-form";
 import {
   BaseInfoSchemaType,
   EducationSchemaType,
-  ResumeSchemaType,
   SkillsSchemaType,
   WorkExperienceSchemaType,
-  baseInfoSchema,
 } from "./formSchema";
 import { useEffect } from "react";
 import useResumeStore from "@/store/resume";

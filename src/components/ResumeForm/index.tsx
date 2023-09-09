@@ -13,33 +13,11 @@ import useOpenKeyStore from "@/store/openKey";
 
 
 
-export default function CVForm() {
+export default function ResumeForm() {
 
   const tabOpenKey = useOpenKeyStore((state) => state.tabOpenKey);
   const changeTabOpenKey = useOpenKeyStore((state) => state.changeTabOpenKey);
-
-  // const resumeRef = useRef(useResumeStore.getState().data);
-
-  // useEffect(
-  //   () => useResumeStore.subscribe((state) => (resumeRef.current = state.data)),
-  //   [],
-  // );
-
-  // const form = useForm<FormValues>({
-  //   resolver: zodResolver(formSchema),
-  //   defaultValues: resumeRef.current,
-  // });
   const [isFixedTab, setIsFixedTab] = useState(false);
-  // useEffect(() => {
-  //   let subscription: any;
-  //   if (process.env.NODE_ENV === "development") {
-  //     subscription = form.watch((value) => {
-  //       changeData(value as FormValues);
-  //     });
-  //     return () => subscription.unsubscribe();
-  //   }
-  // }, [form, changeData]);
-
   useEffect(() => {
     function handleScroll() {
       // 获取滚动的垂直位置
@@ -60,11 +38,6 @@ export default function CVForm() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  // // 2. Define a submit handler.
-  // function onSubmit(values: FormValues) {
-  //   console.log(values);
-  //   changeData?.(values);
-  // }
   return (
     <div className="h-full pt-4 md:h-screen ">
       <Tabs className="" value={tabOpenKey} onValueChange={changeTabOpenKey}>

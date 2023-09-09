@@ -1,4 +1,4 @@
-import ReactPDF, { Link } from "@react-pdf/renderer";
+import { Link } from "@react-pdf/renderer";
 
 const ResumePDFLink = ({
   src,

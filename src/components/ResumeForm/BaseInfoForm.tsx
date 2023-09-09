@@ -72,10 +72,6 @@ const baseInfoFields: FieldOption[] = [
 
 export default function BaseInfoForm() {
   const baseInfo = useResumeStore((state) => state.baseInfo);
-  // const form = useForm<BaseInfoSchemaType>({
-  //   resolver: zodResolver(baseInfoSchema),
-  //   defaultValues: { baseInfo },
-  // });
   const form = useSyncFields(baseInfoSchema, { baseInfo });
   return (
     <Form {...form}>

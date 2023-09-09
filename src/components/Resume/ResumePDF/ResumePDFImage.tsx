@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import ReactPDF, { Image, Link } from "@react-pdf/renderer";
-
-
+import { Image } from "@react-pdf/renderer";
 const ResumePDFImage = ({
   src,
   isPDF,

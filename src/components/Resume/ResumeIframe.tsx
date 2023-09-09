@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import React from "react";
 import Frame from "react-frame-component";
-import { RESUME_SETTINGS, ResumeSetting, ResumeType } from "@/constant";
+import { RESUME_SETTINGS, ResumeType } from "@/constant";
 import { useMediaQuery } from 'react-responsive'
 
 export default function ResumeIframe({

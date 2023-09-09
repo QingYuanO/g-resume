@@ -1,8 +1,7 @@
-import { pdf, usePDF } from "@react-pdf/renderer";
+import { usePDF } from "@react-pdf/renderer";
 import React, { ReactElement, useEffect } from "react";
 import { Label } from "../ui/label";
 import { Slider } from "../ui/slider";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
 import { throttle } from "lodash-es";
@@ -18,7 +17,6 @@ export default function ResumeControlBar(props: {
 
   const [instance, update] = usePDF({ document });
 
-  // Hook to update pdf when document changes
   useEffect(() => {
     update(document);
   }, [update, document]);
