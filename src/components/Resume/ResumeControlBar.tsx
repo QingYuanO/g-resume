@@ -49,7 +49,7 @@ export default function ResumeControlBar(props: {
         />
       </div>
 
-      <Button variant="outline">
+      <Button variant="outline" asChild>
         <a href={instance.url!} download={fileName}>
           下载
         </a>
