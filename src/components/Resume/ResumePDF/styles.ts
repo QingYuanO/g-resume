@@ -43,7 +43,7 @@ const globalStyles = StyleSheet.create({
     fontFamily: "NotoSansSC",
     flexDirection: "column",
     backgroundColor: "#ffffff",
-    fontSize: 12,
+    fontSize: 14,
     height:'100%'
   },
   flexRow: {
@@ -68,19 +68,19 @@ const globalStyles = StyleSheet.create({
 
 export const textStyles = StyleSheet.create({
   xs: {
-    fontSize: 8,
-  },
-  sm: {
     fontSize: 10,
   },
-  base: {
+  sm: {
     fontSize: 12,
   },
-  lg: {
+  base: {
     fontSize: 14,
   },
-  xl: {
+  lg: {
     fontSize: 16,
+  },
+  xl: {
+    fontSize: 18,
   },
 });
 

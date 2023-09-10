@@ -13,13 +13,14 @@ import ResumePDFLink from "../ResumePDFLink";
 import { RESUME_SETTINGS } from "@/constant";
 import { ResumePDFType } from "..";
 import ResumePDFImage from "../ResumePDFImage";
+import { WorkExperienceSchemaType } from "@/components/ResumeForm/formSchema";
 
 const primaryColor = "#1e293b";
 const secondaryColor = "#475569";
 const grayColor = "#9ca3af";
 const lightColor = "#ca3a08";
 
-const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
+const T1 = ({ resume, isPDF = false, type }: ResumePDFType) => {
   const { baseInfo, workExperience, skills, education } = resume;
   const {
     avatar,
@@ -33,7 +34,7 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
     introduce,
     customUrls,
   } = baseInfo;
-  const { width } = RESUME_SETTINGS[type];
+  const { width, height } = RESUME_SETTINGS[type];
   return (
     <Document title={job}>
       <Page
@@ -50,7 +51,7 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
             borderTop: `2px solid ${lightColor}`,
             color: "#1e293b",
             padding: 24,
-            rowGap: 14,
+            rowGap: 24,
             ...globalStyles.flexCol,
           }}
         >
@@ -72,7 +73,7 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
                 )}
 
                 <View style={{ ...globalStyles.flexCol, rowGap: 8 }}>
-                  <Text style={{ fontWeight: 800, ...textStyles.lg }}>
+                  <Text style={{ fontWeight: 600, ...textStyles.lg }}>
                     {name}
                   </Text>
                   <Text style={{ color: lightColor }}>{job}</Text>
@@ -80,7 +81,7 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
               </View>
               <BWText style={textStyles.lg} text={introduce} />
             </View>
-            <View style={{ ...globalStyles.flexCol, flex: 1, rowGap: 4 }}>
+            <View style={{ ...globalStyles.flexCol, flex: 1, rowGap: 6 }}>
               <UrlItem name={jobAddress} icon="location" isPDF={isPDF} />
               <UrlItem name={email} icon="email" isPDF={isPDF} />
               <UrlItem name={phone} icon="phone" isPDF={isPDF} />
@@ -106,107 +107,21 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
               title="工作经历"
               style={{
                 flex: 2,
-                paddingTop: 14,
+                paddingTop: 20,
                 borderTop: "1px solid #cbd5e1",
                 rowGap: 14,
                 ...globalStyles.flexCol,
               }}
             >
-              {workExperience?.map((item, idx) => {
-                const rangeTimeNode = (
-                  <View
-                    style={{ ...globalStyles.flexCol, flex: 0.8, rowGap: 12 }}
-                  >
-                    <View
-                      style={{
-                        height: 3,
-                        backgroundColor: lightColor,
-                        top: 5,
-                        position: "relative",
-                      }}
-                    ></View>
-                    <Text style={{ color: grayColor, lineHeight: 1.5 }}>
-                      {item.rangeDate}
-                    </Text>
-                  </View>
-                );
-                const companyNode = (
-                  <View
-                    style={{
-                      color: grayColor,
-                      ...globalStyles.flexRowBetween,
-                    }}
-                  >
-                    <Text>{item.company}</Text>
-                    <View
-                      style={{
-                        ...globalStyles.flexRow,
-                        alignItems: "center",
-                        columnGap: 4,
-                      }}
-                    >
-                      <ResumePDFIcon
-                        type="location"
-                        isPDF={isPDF}
-                        style={{ fill: grayColor }}
-                      />
-                      <Text>{item.position}</Text>
-                    </View>
-                  </View>
-                );
-                return (
-                  <View
-                    style={{ ...globalStyles.flexRow, columnGap: 10 }}
-                    key={idx}
-                    wrap={false}
-                  >
-                    {rangeTimeNode}
-                    <View
-                      style={{ ...globalStyles.flexCol, flex: 4.2, rowGap: 4 }}
-                    >
-                      <BWText
-                        style={{
-                          color: lightColor,
-                          fontWeight: 600,
-                        }}
-                        text={item.jobName}
-                      />
-                      {companyNode}
-                      {item.projects.map((project, idx) => {
-                        const content = project.content
-                          ?.split("\n")
-                          .filter(Boolean);
-                        return (
-                          <View
-                            key={idx}
-                            style={{ ...globalStyles.flexCol, rowGap: 2 }}
-                          >
-                            <BWText
-                              style={{
-                                fontWeight: 600,
-                                color: secondaryColor,
-                              }}
-                              text={project.name}
-                            />
-                            <BWText
-                              style={{
-                                color: secondaryColor,
-                              }}
-                              text={project.description}
-                            />
-                            <ContentList content={content} />
-                          </View>
-                        );
-                      })}
-                    </View>
-                  </View>
-                );
-              })}
+              <WorkExperienceList
+                workExperience={workExperience}
+                isPDF={isPDF}
+              />
             </Section>
             <Section
               style={{
                 flex: 1,
-                paddingTop: 14,
+                paddingTop: 20,
                 borderTop: "1px solid #cbd5e1",
                 rowGap: 14,
                 ...globalStyles.flexCol,
@@ -218,7 +133,8 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
                   return (
                     <View
                       key={idx}
-                      style={{ ...globalStyles.flexCol, rowGap: 4 }}
+                      style={{ ...globalStyles.flexCol, rowGap: 8 }}
+                      wrap={false}
                     >
                       <BWText
                         style={{
@@ -238,6 +154,7 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
                     <View
                       key={idx}
                       style={{ ...globalStyles.flexCol, rowGap: 4 }}
+                      wrap={false}
                     >
                       <BWText
                         style={{
@@ -286,14 +203,16 @@ const T1 = ({ resume, isPDF = false, type, height }: ResumePDFType) => {
                   ...globalStyles.flexRow,
                   flexWrap: "wrap",
                 }}
+                wrap={false}
               >
-                {hobby?.map((item, idx) => <Tag tag={item} key={idx}/>)}
+                {hobby?.map((item, idx) => <Tag tag={item} key={idx} />)}
               </Section>
               <Section
                 title="证书"
                 contentStyle={{ gap: 8, flexDirection: "row" }}
+                wrap={false}
               >
-                {certificate?.map((item, idx) => <Tag tag={item} key={idx}/>)}
+                {certificate?.map((item, idx) => <Tag tag={item} key={idx} />)}
               </Section>
             </Section>
           </View>
@@ -335,37 +254,125 @@ const UrlItem = (props: {
   );
 };
 
+const WorkExperienceList = ({
+  workExperience,
+  isPDF,
+}: {
+  workExperience: WorkExperienceSchemaType["workExperience"];
+  isPDF: boolean;
+}) => {
+  return workExperience?.map((item, idx) => {
+    const rangeTimeNode = (
+      <View style={{ ...globalStyles.flexCol, flex: 0.8, rowGap: 12 }}>
+        <View
+          style={{
+            height: 3,
+            backgroundColor: lightColor,
+            top: 5,
+            position: "relative",
+          }}
+        ></View>
+        <Text style={{ color: grayColor, lineHeight: 1.5 }}>
+          {item.rangeDate}
+        </Text>
+      </View>
+    );
+    const companyNode = (
+      <View
+        style={{
+          color: grayColor,
+          ...globalStyles.flexRowBetween,
+        }}
+      >
+        <Text>{item.company}</Text>
+        <View
+          style={{
+            ...globalStyles.flexRow,
+            alignItems: "center",
+            columnGap: 4,
+          }}
+        >
+          <ResumePDFIcon
+            type="location"
+            isPDF={isPDF}
+            style={{ fill: grayColor }}
+          />
+          <Text>{item.position}</Text>
+        </View>
+      </View>
+    );
+    return (
+      <View
+        style={{ ...globalStyles.flexRow, columnGap: 10 }}
+        key={idx}
+        wrap={false}
+      >
+        {rangeTimeNode}
+        <View style={{ ...globalStyles.flexCol, flex: 4.2, rowGap: 10 }}>
+          <View style={{ ...globalStyles.flexCol, rowGap: 8 }}>
+            <BWText
+              style={{
+                color: lightColor,
+                fontWeight: 600,
+              }}
+              text={item.jobName}
+            />
+            {companyNode}
+          </View>
+
+          <View
+            style={{
+              ...globalStyles.flexCol,
+              rowGap: 10,
+            }}
+          >
+            {item.projects.map((project, idx) => {
+              const content = project.content?.split("\n").filter(Boolean);
+              return (
+                <View key={idx} style={{ ...globalStyles.flexCol, rowGap: 2 }}>
+                  <BWText
+                    style={{
+                      fontWeight: 600,
+                      color: secondaryColor,
+                    }}
+                    text={project.name}
+                  />
+                  <BWText
+                    style={{
+                      color: secondaryColor,
+                    }}
+                    text={project.description}
+                  />
+                  <ContentList content={content} />
+                </View>
+              );
+            })}
+          </View>
+        </View>
+      </View>
+    );
+  });
+};
+
 const ContentList = ({ content }: { content?: string[] }) => {
   if (!content) return null;
   return (
-    <View style={{}}>
+    <View
+      style={{
+        ...globalStyles.flexCol,
+      }}
+    >
       {content?.map((c, i) => {
         return (
-          <View
-            key={i}
-            style={{
-              ...globalStyles.flexRow,
-              columnGap: 5,
-              alignItems: "flex-start",
-            }}
-          >
-            <View
-              style={{
-                height: 4,
-                width: 4,
-                borderRadius: "50%",
-                backgroundColor: lightColor,
-                position: "relative",
-                top: 6,
-              }}
-            ></View>
+          <Text key={i}>
+            <Text style={{ color: lightColor }}>{"•"}</Text>
             <BWText
               style={{
                 color: secondaryColor,
               }}
               text={c}
             />
-          </View>
+          </Text>
         );
       })}
     </View>
@@ -395,16 +402,15 @@ const Section = ({
   style,
   contentStyle,
   title,
+  wrap = true,
 }: PropsWithChildren<{
   style?: ReactPDF.TextProps["style"];
   contentStyle?: ReactPDF.TextProps["style"];
   title?: string;
+  wrap?: boolean;
 }>) => {
   return (
-    <View
-      style={{ rowGap: 10, ...globalStyles.flexCol, ...style }}
-      wrap={false}
-    >
+    <View style={{ rowGap: 10, ...globalStyles.flexCol, ...style }} wrap={wrap}>
       {title && (
         <Text style={{ ...textStyles.lg, fontWeight: "semibold" }}>
           {title}

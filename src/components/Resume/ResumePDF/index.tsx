@@ -8,18 +8,16 @@ export type ResumePDFType = {
   type: ResumeType;
   resume: ResumeSchemaType;
   isPDF?: boolean;
-  height:number
 }
 
 export default function ResumePDF({
   type,
   resume,
   isPDF = false,
-  height
 }: ResumePDFType) {
   return (
     <>
-      {{ t1: <T1 resume={resume} isPDF={isPDF} type={type} height={height} />, t2: "" }[type]}
+      {{ t1: <T1 resume={resume} isPDF={isPDF} type={type} />, t2: "" }[type]}
       <SuppressResumePDFErrorMessage />
     </>
   );

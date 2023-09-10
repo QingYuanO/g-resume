@@ -18,8 +18,8 @@ const Resume = () => {
   const { height: initHeight } = RESUME_SETTINGS[type];
   const [height, setHeight] = useState(initHeight);
   const pdf = useMemo(
-    () => <ResumePDF resume={resume} type={type} isPDF height={height} />,
-    [resume, height],
+    () => <ResumePDF resume={resume} type={type} isPDF />,
+    [resume],
   );
 
   return (
@@ -27,12 +27,7 @@ const Resume = () => {
       <div className="relative ">
         <section className="flex justify-center overflow-hidden overflow-y-auto pt-16 md:h-[calc(100vh-5rem)]">
           <ResumeIframeCSR enablePDFViewer={isPDF} type={type} height={height}>
-            <ResumePDF
-              resume={resume}
-              type={type}
-              isPDF={isPDF}
-              height={height}
-            />
+            <ResumePDF resume={resume} type={type} isPDF={isPDF} />
           </ResumeIframeCSR>
         </section>
         <ResumeControlBarCSR
