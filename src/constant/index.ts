@@ -1,3 +1,5 @@
+import { getA4RatioHeight } from "@/utils";
+
 export interface ResumeSetting {
   height: number;
   width: number;
@@ -9,18 +11,15 @@ export interface ResumeSettings {
 }
 export type ResumeType = keyof ResumeSettings;
 
-//高宽比
-const a4Ratio = 29.7 / 21;
-
 export const RESUME_SETTINGS: ResumeSettings = {
   t1: {
-    height: Math.floor(780 * a4Ratio) ,
+    height: getA4RatioHeight(780),
     width: 780,
     scale: 0.7,
   },
   t2: {
-    height: 960,
-    width: 780,
+    height: getA4RatioHeight(640),
+    width: 640,
     scale: 0.8,
   },
 };
