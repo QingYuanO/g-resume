@@ -34,7 +34,7 @@ export default function ResumeControlBar(props: {
     setDebounceHeight(v);
   };
   return (
-    <div className=" sticky inset-x-0 bottom-0 z-50 flex h-20 origin-top-left  items-center justify-between bg-white md:min-w-fit">
+    <div className=" sticky inset-x-0 bottom-0 z-50 flex h-20 origin-top-left  items-center justify-between bg-background md:min-w-fit">
       <div className="flex flex-grow items-center">
         <Label>高度</Label>
         <Slider

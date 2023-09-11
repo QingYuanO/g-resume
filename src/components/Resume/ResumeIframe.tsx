@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import Frame from "react-frame-component";
 import { RESUME_SETTINGS, ResumeType } from "@/constant";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from "react-responsive";
 
 export default function ResumeIframe({
   children,
@@ -17,9 +17,13 @@ export default function ResumeIframe({
   height: number;
   type: ResumeType;
 }) {
-  let { scale, width } = RESUME_SETTINGS[type];  
-  const isMobile = useMediaQuery({ maxWidth: 767 })
-  isMobile && (scale = scale * 0.5);
+  let { scale, width } = RESUME_SETTINGS[type];
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isSmall = useMediaQuery({ maxWidth: 850 });
+  const isMiddle = useMediaQuery({ maxWidth: 1000 });
+  isMobile && (scale = scale * 0.6);
+  isSmall && (scale = scale * 0.8);
+  isMiddle && (scale = scale * 0.9);
   const iframeInitialContent = `<!DOCTYPE html>
   <html style='height:100%'>
     <head>
