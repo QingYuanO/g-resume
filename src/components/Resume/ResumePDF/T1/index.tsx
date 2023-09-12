@@ -14,6 +14,9 @@ import { RESUME_SETTINGS } from "@/constant";
 import { ResumePDFType } from "..";
 import ResumePDFImage from "../ResumePDFImage";
 import { WorkExperienceSchemaType } from "@/components/ResumeForm/formSchema";
+import Tag from "../Tag";
+import IconText from "../IconText";
+import ContentList from "../ContentList";
 
 const primaryColor = "#1e293b";
 const secondaryColor = "#475569";
@@ -82,12 +85,28 @@ const T1 = ({ resume, isPDF = false, type }: ResumePDFType) => {
               <BWText style={textStyles.lg} text={introduce} />
             </View>
             <View style={{ ...globalStyles.flexCol, flex: 1, rowGap: 6 }}>
-              <UrlItem name={jobAddress} icon="location" isPDF={isPDF} />
-              <UrlItem name={email} icon="email" isPDF={isPDF} />
-              <UrlItem name={phone} icon="phone" isPDF={isPDF} />
+              <IconText
+                name={jobAddress}
+                icon="location"
+                isPDF={isPDF}
+                color={primaryColor}
+              />
+              <IconText
+                name={email}
+                icon="email"
+                isPDF={isPDF}
+                color={primaryColor}
+              />
+              <IconText
+                name={phone}
+                icon="phone"
+                isPDF={isPDF}
+                color={primaryColor}
+              />
               {customUrls?.map((item, idx) => {
                 return (
-                  <UrlItem
+                  <IconText
+                    color={primaryColor}
                     key={idx}
                     url={item.url}
                     name={item.name}
@@ -143,7 +162,11 @@ const T1 = ({ resume, isPDF = false, type }: ResumePDFType) => {
                         }}
                         text={item.description}
                       />
-                      <ContentList content={content} />
+                      <ContentList
+                        content={content}
+                        dotColor={lightColor}
+                        color={secondaryColor}
+                      />
                     </View>
                   );
                 })}
@@ -205,14 +228,18 @@ const T1 = ({ resume, isPDF = false, type }: ResumePDFType) => {
                 }}
                 wrap={false}
               >
-                {hobby?.map((item, idx) => <Tag tag={item} key={idx} />)}
+                {hobby?.map((item, idx) => (
+                  <Tag tag={item} color={lightColor} key={idx} />
+                ))}
               </Section>
               <Section
                 title="证书"
                 contentStyle={{ gap: 8, flexDirection: "row" }}
                 wrap={false}
               >
-                {certificate?.map((item, idx) => <Tag tag={item} key={idx} />)}
+                {certificate?.map((item, idx) => (
+                  <Tag tag={item} color={lightColor} key={idx} />
+                ))}
               </Section>
             </Section>
           </View>
@@ -223,36 +250,6 @@ const T1 = ({ resume, isPDF = false, type }: ResumePDFType) => {
 };
 
 export default T1;
-
-const UrlItem = (props: {
-  name?: string;
-  url?: string;
-  icon: IconType;
-  isPDF?: boolean;
-}) => {
-  const { name = "-", url, icon, isPDF = false } = props;
-  return (
-    <View
-      style={{ ...globalStyles.flexRow, columnGap: 4, alignItems: "center" }}
-    >
-      <ResumePDFIcon type={icon} isPDF={isPDF} />
-      {url ? (
-        <ResumePDFLink
-          src={url}
-          isPDF={isPDF}
-          style={{
-            alignSelf: "flex-start",
-            color: primaryColor,
-          }}
-        >
-          {name}
-        </ResumePDFLink>
-      ) : (
-        <Text>{name}</Text>
-      )}
-    </View>
-  );
-};
 
 const WorkExperienceList = ({
   workExperience,
@@ -343,7 +340,11 @@ const WorkExperienceList = ({
                     }}
                     text={project.description}
                   />
-                  <ContentList content={content} />
+                  <ContentList
+                    content={content}
+                    dotColor={lightColor}
+                    color={secondaryColor}
+                  />
                 </View>
               );
             })}
@@ -352,49 +353,6 @@ const WorkExperienceList = ({
       </View>
     );
   });
-};
-
-const ContentList = ({ content }: { content?: string[] }) => {
-  if (!content) return null;
-  return (
-    <View
-      style={{
-        ...globalStyles.flexCol,
-      }}
-    >
-      {content?.map((c, i) => {
-        return (
-          <Text key={i}>
-            <Text style={{ color: lightColor }}>{"•"}</Text>
-            <BWText
-              style={{
-                color: secondaryColor,
-              }}
-              text={c}
-            />
-          </Text>
-        );
-      })}
-    </View>
-  );
-};
-const Tag = ({ tag }: { tag: string }) => {
-  return (
-    <View
-      style={{
-        padding: "3pt 8pt",
-        border: `1px solid ${lightColor}`,
-        borderRadius: 4,
-      }}
-    >
-      <BWText
-        style={{
-          color: lightColor,
-        }}
-        text={tag}
-      />
-    </View>
-  );
 };
 
 const Section = ({

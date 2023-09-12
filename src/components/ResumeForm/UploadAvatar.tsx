@@ -10,8 +10,8 @@ export default function UploadAvatar({
   onSuccess?: (img: string) => void;
 }) {
   const changeData = useResumeStore((state) => state.changeData);
+  const baseInfo = useResumeStore((state) => state.baseInfo);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
     if (e.target.files) {
       let file = e.target.files[0];
       //首先判断是否是图片
@@ -40,7 +40,7 @@ export default function UploadAvatar({
         console.log(url);
         if (url) {
           onSuccess?.(url as string);
-          changeData({field:'baseInfo.avatar', value: url as string});
+          changeData({ field: "baseInfo.avatar", value: url as string });
         }
       };
     }
@@ -48,9 +48,19 @@ export default function UploadAvatar({
 
   return (
     <div className="col-span-3 self-end">
-      <Button>
-        <Label htmlFor="avatar">上传头像</Label>
-      </Button>
+      {baseInfo.avatar ? (
+        <Button
+          variant="destructive"
+          onClick={() => changeData({ field: "baseInfo.avatar", value: "" })}
+        >
+          移除头像
+        </Button>
+      ) : (
+        <Button>
+          <Label htmlFor="avatar">上传头像</Label>
+        </Button>
+      )}
+
       <input
         style={{ width: 0, height: 0 }}
         onChange={handleChange}

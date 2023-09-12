@@ -1,31 +1,37 @@
-"use client";
-import ResumeForm from "@/components/ResumeForm";
-import Resume from "@/components/Resume";
-import { Font } from "@react-pdf/renderer";
+import Link from "next/link";
+import Image from "next/image";
 
-Font.register({
-  family: "NotoSansSC",
-  fonts: [
-    {
-      src: "/font/NotoSansSC-Regular.ttf",
-      fontWeight: "normal",
-    },
-    {
-      src: "/font/NotoSansSC-Bold.ttf",
-      fontWeight: 600,
-    },
-  ],
-});
+const templates = [
+  {
+    img: "/images/T1.png",
+    type: "t1",
+  },
+  {
+    img: "/images/T2.png",
+    type: "t2",
+  },
+];
 
 export default function Home() {
   return (
-    <main className="container relative grid grid-cols-3 gap-x-4 md:grid-cols-7">
-      <div className="relative col-span-3 md:col-span-3">
-        <ResumeForm />
-      </div>
-      <div className="col-span-3 md:col-span-4 md:block">
-        <Resume />
-      </div>
+    <main className="flex min-h-screen flex-col flex-wrap items-center gap-10 bg-transparent p-10 md:flex-row">
+      {templates.map((item) => {
+        return (
+          <Link
+            key={item.type}
+            href={`/resume-builder/${item.type}`}
+            className="block aspect-[21/29.7] w-full overflow-hidden rounded shadow duration-200 hover:scale-110 md:w-[calc(100vw/3-10rem/2)]"
+          >
+            <Image
+              src={item.img}
+              alt={item.type}
+              width={640}
+              height={730}
+              className="w-full"
+            />
+          </Link>
+        );
+      })}
     </main>
   );
 }

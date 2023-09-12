@@ -20,6 +20,6 @@ export const RESUME_SETTINGS: ResumeSettings = {
   t2: {
     height: getA4RatioHeight(640),
     width: 640,
-    scale: 0.8,
+    scale: 0.85,
   },
 };

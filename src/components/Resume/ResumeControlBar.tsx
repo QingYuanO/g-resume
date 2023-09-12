@@ -5,15 +5,15 @@ import { Slider } from "../ui/slider";
 import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
 import { throttle } from "lodash-es";
-import { Loader2 } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 
 export default function ResumeControlBar(props: {
   document: ReactElement;
-  height: number;
+  scale: number;
   fileName?: string;
-  setHeight: (height: number) => void;
+  setScale: (height: number) => void;
 }) {
-  const { document, height, setHeight, fileName } = props;
+  const { document, scale, setScale, fileName } = props;
 
   const [instance, update] = usePDF({ document });
 
@@ -22,7 +22,7 @@ export default function ResumeControlBar(props: {
   }, [update, document]);
   const setDebounceHeight = throttle(
     (v: number) => {
-      setHeight(v);
+      setScale(v);
     },
     800,
     {
@@ -34,18 +34,22 @@ export default function ResumeControlBar(props: {
     setDebounceHeight(v);
   };
   return (
-    <div className=" sticky inset-x-0 bottom-0 z-50 flex h-20 origin-top-left  items-center justify-between bg-background md:min-w-fit">
+    <div className=" sticky inset-x-0 bottom-0 z-50 flex h-20 w-full items-center justify-between self-baseline bg-background md:min-w-fit">
       <div className="flex flex-grow items-center">
-        <Label>高度</Label>
+        <Label>
+          <Search size={18} />
+        </Label>
         <Slider
-          defaultValue={[height]}
-          max={1400}
+          defaultValue={[scale]}
+          max={100}
+          min={50}
           step={1}
-          className="w-[50%]"
+          className="w-32"
           onValueChange={(v) => handleHeightChange(v[0])}
         />
+        <span>{scale}%</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex w-full flex-grow items-center justify-end">
         <div className="mr-2 h-4 w-4 ">
           {instance.loading && <Loader2 className="h-4 w-4 animate-spin" />}
         </div>
@@ -58,7 +62,6 @@ export default function ResumeControlBar(props: {
     </div>
   );
 }
-
 
 export const ResumeControlBarCSR = dynamic(
   () => Promise.resolve(ResumeControlBar),

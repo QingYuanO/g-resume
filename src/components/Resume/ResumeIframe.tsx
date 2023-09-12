@@ -9,15 +9,15 @@ import { useMediaQuery } from "react-responsive";
 export default function ResumeIframe({
   children,
   enablePDFViewer = false,
-  height,
+  scale,
   type,
 }: {
   children: React.ReactNode;
   enablePDFViewer?: boolean;
-  height: number;
+  scale: number;
   type: ResumeType;
 }) {
-  let { scale, width } = RESUME_SETTINGS[type];
+  let { height, width } = RESUME_SETTINGS[type];
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isSmall = useMediaQuery({ maxWidth: 850 });
   const isMiddle = useMediaQuery({ maxWidth: 1000 });
@@ -54,16 +54,16 @@ export default function ResumeIframe({
     <div
       style={{
         maxWidth: `${width * scale}px`,
-        maxHeight: `${height * scale}px`,
+        maxHeight: `${height * 2 * scale}px`,
       }}
     >
       <div
         style={{
           width: `${width}px`,
-          height: `${height}px`,
+          height: `${height * 2}px`,
           transform: `scale(${scale})`,
         }}
-        className={`origin-top-left shadow-lg `}
+        className={`relative origin-top-left shadow-lg`}
       >
         <Frame
           style={{ width: "100%", height: "100%" }}
@@ -71,6 +71,10 @@ export default function ResumeIframe({
         >
           {children}
         </Frame>
+        <div
+          className="absolute inset-x-0 border border-dashed border-gray-300 opacity-50 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:translate-y-1/2 after:select-none after:text-sm after:text-gray-400 after:content-['分页'] "
+          style={{ top: `${height}px` }}
+        ></div>
       </div>
     </div>
   );
