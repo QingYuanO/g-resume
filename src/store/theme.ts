@@ -17,7 +17,7 @@ const useThemeStore = create<OpenKeyStore>()(
         set(() => ({ theme: get().theme === "dark" ? "light" : "dark" })),
     }),
     {
-      name: "openKeyStore ",
+      name: "useThemeStore ",
       storage: createJSONStorage(() => localStorage),
     },
   ),

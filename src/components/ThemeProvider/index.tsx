@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import useThemeStore from "@/store/theme";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 
 export default function ThemeProvider({ children }: { children?: ReactNode }) {
   const theme = useThemeStore((state) => state.theme);
-  return (
-    <div className={`${theme} bg-background text-foreground w-full h-full`}>{children}</div>
-  );
+  useEffect(() => {
+    document.body.classList.remove(theme === "dark" ? "light" : "dark");
+    document.body.classList.add(theme);
+  }, [theme]);
+  return null;
 }
