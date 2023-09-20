@@ -55,7 +55,7 @@ export default function ResumeForm() {
         </div>
 
         {isFixedTab && <div className="h-10 md:hidden"></div>}
-        <ScrollArea className="md:h-[calc(100vh-4.5rem)]">
+        <ScrollArea className="md:h-[calc(100vh-3.5rem)]">
           <TabsContent value="baseInfo">
             <BaseInfoForm />
           </TabsContent>
