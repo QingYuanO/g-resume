@@ -84,14 +84,14 @@ const DynamicPDFViewer = dynamic(
   () => import("@react-pdf/renderer").then((module) => module.PDFViewer),
   {
     ssr: false,
-    loading: () => (
-      <div className="flex h-full w-full items-center justify-center">
-        <Image src="/Infinity.svg" width={80} height={80} alt="加载中..." />
-      </div>
-    ),
   },
 );
 
 export const ResumeIframeCSR = dynamic(() => Promise.resolve(ResumeIframe), {
   ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center">
+      <Image src="/Infinity.svg" width={80} height={80} alt="加载中..." />
+    </div>
+  ),
 });
