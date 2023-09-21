@@ -22,13 +22,13 @@ export default function Home() {
           <div className="w-full bg-zinc-50/90 ring-1 ring-zinc-100 dark:bg-zinc-900/80 dark:ring-zinc-400/20" />
         </div>
       </div>
-      <main className="relative z-50 mx-auto grid grid-cols-2 place-content-center justify-items-center gap-10 py-5 md:max-w-fit ">
+      <main className="relative z-50 mx-auto grid grid-cols-2 place-content-center justify-items-center gap-10 py-10 md:max-w-fit ">
         {templates.map((item, idx) => {
           return (
             <Link
               key={item.type}
               href={`/resume-builder/${item.type}`}
-              className="col-span-2 block aspect-[21/29.7] w-2/3 overflow-hidden rounded shadow duration-200  hover:scale-110 md:col-span-1 md:w-1/2 md:odd:justify-self-end md:even:justify-self-start"
+              className="col-span-2 block aspect-[21/29.7] w-2/3 overflow-hidden rounded shadow duration-200  hover:scale-110 md:col-span-1 md:w-full md:odd:justify-self-end md:even:justify-self-start"
             >
               <Image
                 src={item.img}
