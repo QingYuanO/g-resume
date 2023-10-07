@@ -6,9 +6,9 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "简历",
+  title: "生成简历",
   description: "多模版简历生成",
-  keywords: "简历，简历模版",
+  keywords: "生成简历，简历模版",
 };
 
 export default function RootLayout({
