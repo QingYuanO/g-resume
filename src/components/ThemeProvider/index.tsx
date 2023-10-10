@@ -1,12 +1,9 @@
-"use client";
-import useThemeStore from "@/store/theme";
-import React, { ReactNode, useEffect } from "react";
+"use client"
 
-export default function ThemeProvider({ children }: { children?: ReactNode }) {
-  const theme = useThemeStore((state) => state.theme);
-  useEffect(() => {
-    document.body.classList.remove(theme === "dark" ? "light" : "dark");
-    document.body.classList.add(theme);
-  }, [theme]);
-  return null;
+import * as React from "react"
+import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { type ThemeProviderProps } from "next-themes/dist/types"
+
+export default function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
