@@ -1,0 +1,24 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    ["styled\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["tw\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["{([\\s\\S]*)}", ":\\s*['\"`]([^'\"`]*)['\"`]"],
+    "Style\\s*=\\s*['\"`]([^'\"`]*)['\"`]"
+  ],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "cSpell.ignoreWords": [
+    "tmui",
+    "nuxt",
+    "antd",
+    "tailwindcss",
+    "zustand",
+    "immer",
+    "weapp",
+    "tarojs",
+    "fnames"
+  ],
+
+}
