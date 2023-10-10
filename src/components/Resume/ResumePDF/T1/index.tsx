@@ -17,11 +17,34 @@ import { WorkExperienceSchemaType } from "@/components/ResumeForm/formSchema";
 import Tag from "../Tag";
 import IconText from "../IconText";
 import ContentList from "../ContentList";
+import { createTw } from "react-pdf-tailwind";
 
 const primaryColor = "#1e293b";
 const secondaryColor = "#475569";
 const grayColor = "#9ca3af";
 const lightColor = "#ca3a08";
+
+const tw = createTw({
+  theme: {
+    fontFamily: {
+      sans: ["NotoSansSC"],
+    },
+    fontSize: {
+      xs: 10,
+      sm: 12,
+      base: 14,
+      lg: 16,
+      xl: 18,
+    },
+    extend: {
+      colors: {
+        primary: "#1e293b",
+        secondary: "#475569",
+        gray: "#9ca3af",
+      },
+    },
+  },
+});
 
 const T1 = ({ resume, isPDF = false, type }: ResumePDFType) => {
   const { baseInfo, workExperience, skills, education } = resume;
@@ -47,6 +70,9 @@ const T1 = ({ resume, isPDF = false, type }: ResumePDFType) => {
           ...globalStyles.flexCol,
           backgroundColor: "#f6f8fa",
           color: primaryColor,
+          // ...tw(
+          //   `flex h-full flex-col bg-[#f6f8fa] font-sans text-base text-primary`,
+          // ),
         }}
       >
         <View
