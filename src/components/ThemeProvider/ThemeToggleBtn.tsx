@@ -5,15 +5,23 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export default function ThemeToggleBtn() {
+  const [mounted, setMounted] = useState(false);
   const { setTheme, theme } = useTheme();
   useEffect(() => {
-    const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
-    if (themeMedia.matches) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
+    if (theme === "system") {
+      const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
+      if (themeMedia.matches) {
+        setTheme("light");
+      } else {
+        setTheme("dark");
+      }
     }
-  }, [setTheme]);
+    setMounted(true);
+  }, [setTheme, theme]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <Button
