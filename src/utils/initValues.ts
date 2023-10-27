@@ -21,7 +21,7 @@ const initValues: ResumeSchemaType = {
 
   workExperience: [
     {
-      company: "深圳瑞赛网络科技有限公司",
+      company: "深圳宇宙第一有限公司",
       jobName: "前端开发工程师",
       position: "深圳",
       rangeDate: "2021/07 - 至今",
@@ -42,7 +42,7 @@ const initValues: ResumeSchemaType = {
       ],
     },
     {
-      company: "深圳市欧克互动科技有限公司",
+      company: "深圳宇宙第一有限公司",
       jobName: "前端开发工程师",
       position: "深圳",
       rangeDate: "2020/08 - 2021/07",
@@ -62,7 +62,7 @@ const initValues: ResumeSchemaType = {
       ],
     },
     {
-      company: "⼴西盛源⾏电⼦信息股份有限公司",
+      company: "哈哈电⼦信息股份有限公司",
       jobName: "前端开发工程师",
       position: "⼴西柳州",
       rangeDate: "2019/07 - 2020/06",
@@ -101,7 +101,7 @@ const initValues: ResumeSchemaType = {
   ],
   education: [
     {
-      school: "桂林电子科技大学信息科技学院",
+      school: "火星电子科技大学信息科技学院",
       level: "本科",
       major: "软件工程",
       rangeDate: "2016/09 - 2020/07",
